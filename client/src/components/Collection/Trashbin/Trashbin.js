@@ -21,7 +21,7 @@ const Trashbin = () => {
     const [ wasteType, setWasteType ] = useState()
     const [ street, setStreet ] = useState()
     const [viewport, setViewport] = useState({
-        width: FullscreenControl,
+        width: "100%",
         height: 500,
         latitude: 14.5378,
         longitude: 121.0014,
@@ -74,10 +74,10 @@ const Trashbin = () => {
     }
 
     return (
-        <section className="page-section">
+        <section className="page-section container">
                 <Container maxWidth='xl'>
                     <AppBar className={classes.appBar} position='static' color ='inherit'>
-                        <Typography variant = 'h3'>Real Time Trashbin monitoring</Typography>
+                        <Typography variant = 'h4'>Real Time Trashbin monitoring</Typography>
                     </AppBar>
                     {active? (<>
                     <Grid container spacing={3}>
@@ -104,7 +104,7 @@ const Trashbin = () => {
                                 mapStyle='mapbox://styles/dagzue25/ckyll6k1vjm8115nuyctict7l'
                                 
                                 {...viewport}
-                                mapboxApiAccessToken={process.env.REACT_APP_MAPBOX}
+                                mapboxApiAccessToken="pk.eyJ1IjoiZGFnenVlMjUiLCJhIjoiY2t5aXB4ZGUxMXV3YzJwbGtrZzV2c3A1eCJ9.N1NJsWrEJAuCbOlxol71IA"
                                 onViewportChange={nextViewport => setViewport(nextViewport)}>
                                     {collectorLat && collectorLong ? (<Marker latitude={collectorLat} longitude={collectorLong}>
                                         <img src={truck} alt='truck' style={{width:viewport.zoom*3 ,cursor:'pointer'}}/>

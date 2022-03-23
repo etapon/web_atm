@@ -1,4 +1,4 @@
-import { START_LOADING, END_LOADING, SCHEDULES, SCHEDULE, CREATE_SCHEDULE, UPDATE_SCHEDULE, DELETE_SCHEDULE, MESSAGE, MESSAGE_TYPE } from '../../components/constants/actionTypes'
+import { START_LOADING, END_LOADING, SCHEDULES, SCHEDULE, CREATE_SCHEDULE, UPDATE_SCHEDULE, DELETE_SCHEDULE, MESSAGE, MESSAGE_TYPE, FETCH_BY_SEARCH_SCHEDULES } from '../../components/constants/actionTypes'
 import * as api from '../api/index'
 
 export const getSchedules = (page) => async (dispatch) => {
@@ -76,6 +76,20 @@ export const deleteSchedule = (id) => async (dispatch) => {
         dispatch({type: MESSAGE_TYPE, payload: 'success'})
         dispatch({type: MESSAGE, payload: 'Schedule Successfuly Deleted'})
         dispatch({type: DELETE_SCHEDULE, payload: id})
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getSchedulesBySearch = (searchQuery) => async (dispatch) => {
+    try {
+        dispatch({type: START_LOADING})
+
+        const { data: {data}} = await api.getSchedulesBySearch(searchQuery)
+        dispatch({type: FETCH_BY_SEARCH_SCHEDULES, payload: {data}})
+
+        dispatch({type: END_LOADING})
+
     } catch (error) {
         console.log(error)
     }

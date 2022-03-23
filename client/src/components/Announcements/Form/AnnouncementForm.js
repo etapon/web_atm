@@ -20,17 +20,25 @@ const AnnouncementForm = ({announcementId, setAnnouncementId}) => {
     const announcement = useSelector((state) => announcementId ? state.announcement.announcements.find((a) => a._id === announcementId): null)
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
     const [announcementData, setAnnouncementData] = useState({
-        creator: '', title: '', message: '', barangay: '', selectedFile: '', profile: ''
+        creator: '', title: '', message: '', street: '', selectedFile: '', profile: ''
     })
 
     useEffect(()=> {
         if(announcement) setAnnouncementData(announcement);
         setUser(JSON.parse(localStorage.getItem('profile')));
+        console.log(announcement)
+        // setAnnouncementData({...announcementData, title: announcement.title, street: announcement.street, selectedFile: announcement.selectedfile})
         
     }, [announcement])
 
     useEffect(()=> {
-        setAnnouncementData({...announcementData, creator: user.result?.name, profile: user.result?.image, selectedFile: defaultAnnouncementImage})
+        if(announcement){
+            setAnnouncementData({...announcementData, title: announcement.title, message: announcement.message, street: announcement.street, selectedFile: announcement.selectedfile, creator: user.result?.name, profile: user.result?.image, selectedFile: defaultAnnouncementImage})
+
+        } else {
+            setAnnouncementData({...announcementData, creator: user.result?.name, profile: user.result?.image, selectedFile: defaultAnnouncementImage})
+
+        }
     },[user])
 
 
@@ -46,7 +54,7 @@ const AnnouncementForm = ({announcementId, setAnnouncementId}) => {
     }
     const clear = () => {
         setAnnouncementId(null)
-        setAnnouncementData({creator: '', title: '', message: '', barangay: '', selectedFile: ''})
+        setAnnouncementData({creator: '', title: '', message: '', street: '', selectedFile: ''})
     }
 
     const [streetSelect, setStreetSelect] = useState('')

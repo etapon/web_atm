@@ -103,7 +103,7 @@ const Account = () => {
     };
 
     return (
-        <>
+        <div className='container'>
          <section className="page-section">
             <Container maxWidth='xl' className='mt-5'>
                 <Paper style={{ padding: '20px', borderRadius: '15px', marginTop:'15px' }} elevation={6}>
@@ -185,7 +185,7 @@ const Account = () => {
             </Typography>
             </Box>
         </Modal>
-        </>
+        </div>
     );
 };
 

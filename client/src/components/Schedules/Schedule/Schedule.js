@@ -9,7 +9,6 @@ import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 
 import { deleteSchedule } from '../../../redux/actions/schedule'
-// import { deleteProducer } from '../../../actions/producers';
 
 const Schedule = ({schedule, isAdmin, setScheduleId}) => {
     const classes = useStyles()
@@ -31,10 +30,10 @@ const Schedule = ({schedule, isAdmin, setScheduleId}) => {
         <>
             <Card className={classes.card}>
                 <ButtonBase className={classes.cardAction} onClick={openSchedule}>
-                    <CardMedia className={classes.media} image={schedule.cover || "https://www.cnn.ph/.imaging/mte/demo-cnn-new/750x450/dam/cnn/2021/2/4/Pasay-City-Logo_CNNPH.jpg/jcr:content/Pasay-City-Logo_CNNPH.jpg"} title={schedule.street}/>
+                    <CardMedia className={classes.media} image={ "https://www.cnn.ph/.imaging/mte/demo-cnn-new/750x450/dam/cnn/2021/2/4/Pasay-City-Logo_CNNPH.jpg/jcr:content/Pasay-City-Logo_CNNPH.jpg"} title={schedule.street}/>
                    
                     <div className={classes.overlay}>
-                        <Typography variant="h4">{schedule.day}</Typography>
+                        <Typography variant="h4" color="inherit">{schedule.day}</Typography>
                         
                     </div>
                     <CardContent>

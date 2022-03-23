@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 
 import {useDispatch} from 'react-redux'
-import {Link, useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
-import useStyles from './styles';
-import {Card, CardActions, CardContent, CardMedia, Button, Typography, ButtonBase, Divider, CardHeader, Avatar, IconButton, Collapse} from '@material-ui/core'
+import {Card, CardActions, CardContent, CardMedia,  Typography, CardHeader, Avatar, IconButton, Collapse} from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
-import FavoriteIcon from '@material-ui/icons/Favorite'
-import ShareIcon from '@material-ui/icons/Share'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import red from '@material-ui/core/colors/red'
 import {styled} from '@material-ui/styles'
@@ -22,13 +18,12 @@ const ExpandMore = styled((props) => {
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  // transition: theme.transitions.create('transform', {
-  //   duration: theme.transitions.duration.shortest,
-  // }),
+  marginLeft: 'auto'
 }));
 
-const Announcement = ({announcement, setAnnouncementId}) => {
+
+
+const Announcement = ({announcement, setAnnouncementId, isAdmin}) => {
     const dispatch = useDispatch();
     const nav = useNavigate();
 
@@ -55,12 +50,14 @@ const Announcement = ({announcement, setAnnouncementId}) => {
         }
         action={
           <>
+          {isAdmin ? <>
           <IconButton aria-label="settings" onClick={handleEdit}>
             <EditIcon />
           </IconButton>
           <IconButton aria-label="settings" onClick={()=> dispatch(deleteAnnouncement(announcement._id))}>
             <DeleteIcon />
-          </IconButton>
+          </IconButton></>:null}
+          
           </>
         }
         title={announcement.creator}
@@ -73,14 +70,12 @@ const Announcement = ({announcement, setAnnouncementId}) => {
         alt={announcement.title}
       />
       <CardContent>
-        <Typography variant="body2">
-         {announcement.title}
+        <Typography variant="h5">
+          <strong>{announcement.title}</strong>
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
+        
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -91,9 +86,7 @@ const Announcement = ({announcement, setAnnouncementId}) => {
         </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography variant='h6' paragraph>To the residents of: {announcement.street}</Typography>
-          
+        <CardContent>{announcement.street? <Typography variant='h6' paragraph>To the residents of: {announcement.street}</Typography> : null}
           <Typography paragraph>
             {announcement.message}
           </Typography>

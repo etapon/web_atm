@@ -28,8 +28,9 @@ export const getPlainAnnouncements = async (req, res) => {
 
 export const createAnnouncement = async (req, res) => {
     const announcement = req.body;
-    const newAnnouncement = new Announcement(announcement);
+    
     try {
+        const newAnnouncement = new Announcement(announcement);
         await newAnnouncement.save()
         res.json({message: "Announcement Successfuly Created", result: newAnnouncement, success: true})
     } catch (error) {
@@ -73,4 +74,18 @@ export const likeAnnouncement = async(req, res) => {
 
     const updatedAnnouncement = await Announcement.findByIdAndUpdate(id, announcement, {new: true})
     res.json(updatedAnnouncement);
+}
+
+export const getAnnouncementsBySearch = async (req, res) => {
+    const {searchQuery} = req.query;
+    try {
+
+        if(searchQuery != 'none'){
+            const announcements = await Announcement.find({"street": {$regex: searchQuery, $options: 'i'}})
+            res.json({data: announcements})
+        }
+
+    } catch (error) {
+        res.json({message: error.message, success: false})
+    }
 }

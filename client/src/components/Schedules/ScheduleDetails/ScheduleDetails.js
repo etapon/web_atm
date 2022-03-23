@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {Paper, Typography, CircularProgress, Button, Divider, Modal, Select, MenuItem, Box} from '@material-ui/core';
 
 import useStyles from './styles'
+import infographic from './infographic.jpg'
 import { getSchedule } from '../../../redux/actions/schedule';
 
 const ScheduleDetails = () => {
@@ -26,7 +27,7 @@ const ScheduleDetails = () => {
     }
 
     return (
-        <div>
+        <div className="container">
             <section className="page-section mt-5">
                 {!isLoading? (
                     <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
@@ -46,7 +47,7 @@ const ScheduleDetails = () => {
                                 </ul>
                             </div>
                             <div className={classes.imageSection}>
-                                <img className={classes.media} src={"https://aatfweb.files.wordpress.com/2017/06/film.jpg"} alt='alt' />
+                                <img className={classes.media} src={infographic} alt='alt' />
                             </div>
                         </div>
                     </Paper>

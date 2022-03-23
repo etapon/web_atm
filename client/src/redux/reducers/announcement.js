@@ -1,4 +1,4 @@
-import { ANNOUNCEMENTS, START_LOADING, END_LOADING, UPDATE_ANNOUNCEMENT, DELETE_ANNOUNCEMENT } from '../../components/constants/actionTypes';
+import { ANNOUNCEMENTS, START_LOADING, END_LOADING, UPDATE_ANNOUNCEMENT, DELETE_ANNOUNCEMENT, FETCH_BY_SEARCH_ANNOUNCEMENT } from '../../components/constants/actionTypes';
 
 const announcementReducer = (state = {isLoading: true, announcements: []}, action) => {
     switch(action.type){
@@ -6,6 +6,8 @@ const announcementReducer = (state = {isLoading: true, announcements: []}, actio
             return { ...state, isLoading: true};
         case END_LOADING:
             return { ...state, isLoading: false};
+        case FETCH_BY_SEARCH_ANNOUNCEMENT:
+            return { ...state, announcements: action.payload.data};
         case ANNOUNCEMENTS:
             return {
                 ... state,

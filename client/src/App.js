@@ -8,6 +8,7 @@ import useStyles from './styles'
 import {useSelector} from 'react-redux'
 
 import Home from './components/Home/home'
+import AppPage from './components/Home/AppPage/AppPage'
 
 import Header from './components/Layout/Header'
 import Footer from './components/Layout/Footer'
@@ -50,6 +51,7 @@ const App = () => {
                 
                 <Routes>
                     <Route path='/' element={<Home/>}/>
+                    <Route path='/apppage' element={<AppPage/>}/>
                     <Route path='/auth' element={<Auth/>}/>
                     <Route path='/activate/:token' element={<Welcome/>}/>
                     <Route path='/users' element={<Users/>}/>
@@ -59,9 +61,11 @@ const App = () => {
                     <Route path='/schedule/:id' element={<ScheduleDetails/>}/>
                     <Route path='/schedulesForm' element={<ScheduleForm scheduleId={scheduleId} setScheduleId={setScheduleId}/>}/>
                     <Route path='/schedForm' element={<SchedForm scheduleId={scheduleId} setScheduleId={setScheduleId}/>}/>
+                    <Route path='/schedules/search' element={<Schedules/>}/>
 
                     <Route path='/announcements' element={<Announcements setAnnouncementId={setAnnouncementId} />}/>
                     <Route path='/announcementsForm' element={<AnnouncementForm announcementId={announcementId} setAnnouncementId={setAnnouncementId} />}/>
+                    <Route path='/announcements/search' element={<Announcements/>}/>
 
                     <Route path='/trashbin' element={<Trashbin/>}/>
 

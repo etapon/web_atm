@@ -11,11 +11,12 @@ import AddIcon from '@material-ui/icons/Add'
 import Pagination from './Pagination/Pagination'
 import Schedule from './Schedule/Schedule'
 
-
+import { getSchedulesBySearch } from '../../redux/actions/schedule'
 
 function useQuery(){
     return new URLSearchParams(useLocation().search);
 }
+
 
 const Schedules = ({setScheduleId}) => {
     const nav = useNavigate()
@@ -28,7 +29,7 @@ const Schedules = ({setScheduleId}) => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
     const [isAdmin, setIsAdmin] = useState(false)
     const location = useLocation()
-
+    const [scheduleName, setScheduleName] = useState()
     const {schedules, isLoading} = useSelector((state) => state.schedule)
     
     useEffect(()=> {
@@ -45,12 +46,21 @@ const Schedules = ({setScheduleId}) => {
         nav('/schedForm')
     }
 
+    const searchSchedule = () => {
+        if(scheduleName.trim()){
+            dispatch(getSchedulesBySearch({scheduleName}))
+            nav(`/schedules/search?searchQuery=${scheduleName || 'none'}`)
+        } else {
+            nav('/schedules')
+        }
+    }
+
     return (
-        <div>
+        <div className="container">
              <section className="page-section">
                 <Container maxWidth='xl'>
                     <AppBar className={classes.appBar} position='static' color ='inherit'>
-                        <Typography variant = 'h3'>Waste Collecting Schedules</Typography>
+                        <Typography variant = 'h4'>Waste Collecting Schedules</Typography>
                     </AppBar>
                     <Grid className={classes.gridContainer} container justifyContent='space-between' alignItems='stretch' spacing={3}>
                         {isLoading? <CircularProgress/> : (
@@ -58,7 +68,7 @@ const Schedules = ({setScheduleId}) => {
                             <Grid item xs={12} sm={6} md={9}>
                                 <Grid className={classes.container} container alignItems='stretch' spacing={3}>
                                     {schedules.map((schedule) => (
-                                        <Grid key={schedule._id} xs={12} sm={12} md={6} lg={3} item>
+                                        <Grid key={schedule._id} xs={12} sm={12} md={6} lg={4} item>
                                             <Schedule schedule={schedule} isAdmin={isAdmin} setScheduleId={setScheduleId}/>
                                         </Grid>
                                     ))}
@@ -74,11 +84,10 @@ const Schedules = ({setScheduleId}) => {
                                     variant = 'filled'
                                     label = 'Search Schedule'
                                     fullWidth
-                                    // value={producerName}
-                                    // onKeyPress={handleKeyPress}
-                                    // onChange={(e)=>setProducerName(e.target.value)}
+                                    value={scheduleName}
+                                    onChange={(e)=>setScheduleName(e.target.value)}
                                 />
-                                <Button variant='contained' color='primary' startIcon={<SearchIcon/>}>Search</Button>
+                                <Button variant='contained' color='primary' startIcon={<SearchIcon/>} onClick={searchSchedule}>Search</Button>
 
                                 {isAdmin? (
                                 <Button className='mt-2' variant='contained' color='primary'startIcon={<AddIcon />} onClick={handleAdd}>Schedule</Button>

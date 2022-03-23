@@ -7,6 +7,32 @@ import dotenv from 'dotenv'
 import {sendMail} from './sendMail.js';
 import { defaultProfile } from './defaultResources.js';
 
+export const getUserCount = async (req, res) => {
+    try {
+
+        const userCount = await User.count()
+        res.json({sucess: true, result: userCount})
+
+    } catch (error) {
+        res.json({success:false, message: error.message})
+    }
+}
+
+export const getUserStreets = async (req, res) => {
+    try {
+        const result = await User.aggregate(
+            [
+                {$match: { }},
+                {$group: {  _id: "$street", totalUser: {$count: {}}}},
+                {$sort: {totalUser: -1}}
+            ]
+        )
+        res.json({success: true, result: result})
+    } catch (error) {
+        res.json({message: error.message, success: false})
+    }
+}
+
 export const getUsers = async (req, res) => {
     try {
         const users = await User.find();

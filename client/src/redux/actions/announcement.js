@@ -1,4 +1,4 @@
-import { START_LOADING, END_LOADING, ANNOUNCEMENTS, CREATE_ANNOUNCEMENT, UPDATE_ANNOUNCEMENT, DELETE_ANNOUNCEMENT, MESSAGE, MESSAGE_TYPE } from '../../components/constants/actionTypes'
+import { START_LOADING, END_LOADING, ANNOUNCEMENTS, CREATE_ANNOUNCEMENT, UPDATE_ANNOUNCEMENT, DELETE_ANNOUNCEMENT, MESSAGE, MESSAGE_TYPE, FETCH_BY_SEARCH_ANNOUNCEMENT } from '../../components/constants/actionTypes'
 import * as api from '../api/index'
 
 export const getAnnouncements = (page) => async (dispatch) => {
@@ -66,6 +66,20 @@ export const deleteAnnouncement = (id) => async (dispatch) => {
         dispatch({type: DELETE_ANNOUNCEMENT, payload: id})
         
         
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getAnnouncementsBySearch = (searchQuery) => async (dispatch) => {
+    try {
+        dispatch({type: START_LOADING})
+
+        const { data: {data}} = await api.getAnnouncementsBySearch(searchQuery)
+        dispatch({type: FETCH_BY_SEARCH_ANNOUNCEMENT, payload: {data}})
+
+        dispatch({type: END_LOADING})
+
     } catch (error) {
         console.log(error)
     }

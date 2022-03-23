@@ -1,4 +1,4 @@
-import { SCHEDULES, SCHEDULE, START_LOADING, END_LOADING, UPDATE_SCHEDULE, DELETE_SCHEDULE } from '../../components/constants/actionTypes';
+import { SCHEDULES, SCHEDULE, START_LOADING, END_LOADING, UPDATE_SCHEDULE, DELETE_SCHEDULE, FETCH_BY_SEARCH_SCHEDULES } from '../../components/constants/actionTypes';
 
 const scheduleReducer = (state = {isLoading: true, schedules: []}, action) => {
     switch(action.type){
@@ -15,6 +15,8 @@ const scheduleReducer = (state = {isLoading: true, schedules: []}, action) => {
                 }
         case SCHEDULE:
             return { ...state,  schedule: action.payload }
+        case FETCH_BY_SEARCH_SCHEDULES:
+            return { ...state, schedules: action.payload.data};
         case UPDATE_SCHEDULE:
             return { ...state, schedules: state.schedules.map((schedule)=> schedule._id === action.payload._id ? action.payload: schedule)}
         case DELETE_SCHEDULE:

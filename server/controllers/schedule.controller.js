@@ -14,6 +14,15 @@ export const getStreetSchedule = async (req, res) => {
     }
 }
 
+export const getAdminSchedules = async (req, res) => {
+    try {
+        const schedules = await Sched.find()
+        res.json({success: true, result: schedules})
+    } catch (error) {
+        res.json({success: false, message: error.message})
+    }
+}
+
 export const getSchedules = async (req, res) => {
     const {page} = req.query;
     try {
@@ -119,10 +128,25 @@ export const fetchCollectorSchedules = async (req,res) => {
     }
 }
 
+
 export const fetchStreetOfDay = async (req,res) => {
     try {
         const {day} = req.params;
         res.json({message: `day is: ${day}`})
+    } catch (error) {
+        res.json({message: error.message, success: false})
+    }
+}
+
+export const getSchedulesBySearch = async (req, res) => {
+    const {searchQuery} = req.query;
+    try {
+
+        if(searchQuery != 'none'){
+            const schedules = await Sched.find({"queue": {$regex: searchQuery, $options: 'i'}})
+            res.json({data: schedules})
+        }
+
     } catch (error) {
         res.json({message: error.message, success: false})
     }
@@ -139,3 +163,4 @@ function hasDuplicates(array) {
     }
     return false;
 }
+
