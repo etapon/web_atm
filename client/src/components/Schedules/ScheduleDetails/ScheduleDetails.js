@@ -40,6 +40,7 @@ const ScheduleDetails = () => {
                                 <Typography gutterBottom variant="body1" component="p">start of collection: <strong>{schedule.result.startOfCollection}</strong></Typography>
                                 <Divider style={{ margin: '20px 0' }} />
                                 <Typography gutterBottom variant="body1" component="h5">List of Barangay's</Typography>
+
                                 <ul>
                                     {schedule.result.queue.map((schedule) => (
                                         <li>{schedule}</li>

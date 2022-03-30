@@ -20,7 +20,7 @@ const Biodegradable = ({bio}) => {
                     <div className={classes.card}>
                         <div className={classes.section}>
                             <center>
-                                <Typography variant="h6" component="h6">Biodegradables Today</Typography>
+                                <Typography variant="h6" component="h6">Biodegradables Day</Typography>
                                 <Divider style={{ margin: '5px 0' }} />
                                 <img className={classes.media} src={ bio_logo } alt="biodegradable" />
                                 <Typography variant='p'> <strong>{bio? (bio): "0"}</strong> kg</Typography>

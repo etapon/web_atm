@@ -1,4 +1,5 @@
-import { START_LOADING, END_LOADING, SCHEDULES, SCHEDULE, CREATE_SCHEDULE, UPDATE_SCHEDULE, DELETE_SCHEDULE, MESSAGE, MESSAGE_TYPE, FETCH_BY_SEARCH_SCHEDULES } from '../../components/constants/actionTypes'
+import { START_LOADING, END_LOADING, SCHEDULES, SCHEDULE, CREATE_SCHEDULE, UPDATE_SCHEDULE, DELETE_SCHEDULE, 
+    MESSAGE, MESSAGE_TYPE, FETCH_BY_SEARCH_SCHEDULES, SCHED_TODAY } from '../../components/constants/actionTypes'
 import * as api from '../api/index'
 
 export const getSchedules = (page) => async (dispatch) => {
@@ -92,5 +93,14 @@ export const getSchedulesBySearch = (searchQuery) => async (dispatch) => {
 
     } catch (error) {
         console.log(error)
+    }
+}
+
+export const getSchedToday = () => async (dispatch) => {
+    try {
+        const {data} = await api.getSchedToday()
+        dispatch({type:SCHED_TODAY, payload: data.result[0]})
+    } catch (error) {
+        console.log(error.message)
     }
 }

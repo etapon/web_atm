@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const API = axios.create({baseURL: 'https://e-tapon-project.herokuapp.com'})
-// const API = axios.create({baseURL: 'http://localhost:5000'})
+// const API = axios.create({baseURL: 'https://e-tapon-project.herokuapp.com'})
+const API = axios.create({baseURL: 'http://localhost:5000'})
 
 
 API.interceptors.request.use((req)=> {
@@ -63,3 +63,5 @@ export const getCollectedThisMonth = () => API.get(`/collections/getCollectedThi
 export const getCollectedThisYear = () => API.get(`/collections/getCollectedThisYear`)
 export const getCollectedSorted = () => API.get(`/collections/getCollectedSorted`)
 export const getCollectedWasteType = (filter) => API.post(`collections/getCollectedWasteType`, filter)
+
+export const getSchedToday = () => API.get(`/schedules/getSchedToday`)

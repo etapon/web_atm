@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { AppBar, Container, Typography, Button } from '@material-ui/core'
+import { AppBar, Container, Typography, Button, Divider } from '@material-ui/core'
 import useStyles from './styles'
 
 import BioPerStreet from './Biodegradable/content/BioPerStreet'
@@ -31,7 +31,6 @@ const Analytics = () => {
           }, 1000);
           return () => clearInterval(interval);
     })
-
 
     const [byBioVariant, setBioVariant] = useState('outlined')
     const [byNonBioVariant, setNonBioVariant] = useState('text')
@@ -76,23 +75,27 @@ const Analytics = () => {
                     <Button color="primary" variant={byRecyclableVariant} onClick={handleByRecyclable}>Recyclable</Button>
                     <Button color="primary" variant={byCollectionVariant} onClick={handleByCollection}>All Collection</Button>
                     
-                    <div style={{paddingTop: "15px"}}>
+                    <div style={{paddingTop: "30px"}}>
 
                         {byBioVariant == "outlined"? <>
-                            <BioPerStreet/>
-                            <BioRecord bioSorted={bioSorted}/>
+                                <BioPerStreet/>
+                                <Divider style={{ margin: '10px 0' }} />
+                                <BioRecord bioSorted={bioSorted}/>
                         </>:null}
 
                         {byNonBioVariant == "outlined"? <>
                             <NonBioPerStreet/>
+                            <Divider style={{ margin: '10px 0' }} />
                             <NonBioRecord nonBioSorted={nonBioSorted}/>
                         </>:null}
                         {byRecyclableVariant == "outlined"? <>
                             <RecyclablePerStreet/>
+                            <Divider style={{ margin: '10px 0' }} />
                             <RecyclableRecord recyclableSorted={recyclableSorted}/>
                         </>:null}
                         {byCollectionVariant == "outlined"? <>
                             <CollectedWasteType/>
+                            <Divider style={{ margin: '10px 0' }} />
                             <CollectedRecord collectedSorted={collectedSorted}/>
                         </>:null}
                     </div>

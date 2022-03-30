@@ -21,7 +21,7 @@ const NonBiodegradable = ({nonBio}) => {
                     <div className={classes.card}>
                         <div className={classes.section}>
                             <center>
-                                <Typography variant="h6" component="h6">non-Biodegradables Today</Typography>
+                                <Typography variant="h6" component="h6">non-Biodegradables Day</Typography>
                                 <Divider style={{ margin: '5px 0' }} />
                                 <img className={classes.media} src={ non_bio_logo } alt="non-biodegradable" />
                                 <Typography variant='p'><strong> {nonBio? (nonBio): "0"} </strong>kg</Typography>

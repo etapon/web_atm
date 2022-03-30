@@ -4,6 +4,7 @@ import {useLocation} from 'react-router-dom'
 import { AppBar, Container, Typography, Grid } from '@material-ui/core'
 import useStyles from './styles'
 
+import { getSchedToday } from '../../redux/actions/schedule'
 import { getTotalPerStreetToday, getBiodegradablesToday, getNonBiodegradablesToday, getRecyclablesToday } from '../../redux/actions/collection'
 import { getUserStreets } from '../../redux/actions/auth'
 
@@ -12,7 +13,7 @@ import NonBiodegradable from './Today/NonBiodegradable'
 import Recyclable from './Today/Recyclable'
 import Collected from './Today/Collected'
 import CollectionStatus from './Collection/CollectionStatus'
-
+import ScheduleToday from './Today/ScheduleToday'
 import ResidentStreets from './Charts/ResidentStreets'
 import CollectionStreets from './Charts/CollectionStreet'
 
@@ -25,27 +26,37 @@ const Dashboard = () => {
     const [bio, setBio] = useState()
     const [nonBio, setNonBio] = useState()
     const [recyclable, setRecyclable] = useState()
+    const [schedule, setSchedule] = useState()
 
     const { bioCount, nonBioCount, recyclableCount, totalCollected
     } = useSelector((state) => state.collection);
+
+    const { schedToday } = useSelector((state)=> state.schedule)
 
     const {userStreets} = useSelector((state) => state.auth)
     
     useEffect(()=> {
         
         const interval = setInterval(() => {
+            dispatch(getSchedToday())
             dispatch(getUserStreets())
             dispatch(getBiodegradablesToday())
             dispatch(getNonBiodegradablesToday())
             dispatch(getRecyclablesToday())
             dispatch(getTotalPerStreetToday())
+            
           }, 1000);
           return () => clearInterval(interval);
     
     },[])
-    
-    
 
+    // useEffect(()=> {
+    //     if(schedToday != undefined){
+    //         setSchedule(schedToday)
+    //     }
+    // }, [schedToday])
+    
+    
     var total = 0
 
     useEffect(()=>{
@@ -61,6 +72,7 @@ const Dashboard = () => {
         }
     })
 
+
     return (
         <div>
         <section className="page-section">
@@ -70,18 +82,28 @@ const Dashboard = () => {
                 </AppBar>
                 
                 <Grid container spacing={3}>
+                    {schedToday.type == 'Biodegradable'?
+                        <Grid item xs={12} lg={3}>
+                            <Biodegradable bio={bio}/>
+                        </Grid>
+                        : null
+                    }
                     
-                    <Grid item xs={12} lg={3}>
-                        <Biodegradable bio={bio}/>
-                    </Grid>
-                    <Grid item xs={12} lg={3}>
-                        <NonBiodegradable nonBio={nonBio}/>
-                    </Grid>
-                    <Grid item xs={12} lg={3}>
-                        <Recyclable recyclable={recyclable}/>
-                    </Grid>
-                    <Grid item xs={12} lg={3}>
-                        <Collected totalValue={totalValue}/>
+                    {schedToday.type == 'non-Biodegradable'?
+                        <Grid item xs={12} lg={3}>
+                            <NonBiodegradable nonBio={nonBio}/>
+                        </Grid>
+                        : null
+                    }
+
+                    {schedToday.type == 'Recyclable'?
+                        <Grid item xs={12} lg={3}>
+                            <Recyclable recyclable={recyclable}/>
+                        </Grid>
+                        : null
+                    }
+                    <Grid item xs={12} lg={9}>
+                        <ScheduleToday streets={schedToday.queue}/>
                     </Grid>
 
                     <Grid item xs={12} lg={3}>

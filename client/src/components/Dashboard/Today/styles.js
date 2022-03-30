@@ -66,5 +66,10 @@ export default makeStyles((theme) => ({
     width: '100%',
     display: 'block',
     textAlign: 'initial',
+  },
+  listOfStreets: {
+    display: "inline-block",
+    marginLeft: "12px",
+    fles: 1
   }
 }));

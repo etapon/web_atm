@@ -152,6 +152,18 @@ export const getSchedulesBySearch = async (req, res) => {
     }
 }
 
+export const getSchedToday = async (req, res) => {
+    try {
+        let weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][new Date().getDay()]
+
+        const schedule = await Sched.find({day: weekday})
+
+        res.json({result: schedule, success: true})
+    } catch (error) {
+        res.json({message: error.message, success: false})
+    }
+}
+
 function hasDuplicates(array) {
     var valuesSoFar = Object.create(null);
     for (var i = 0; i < array.length; ++i) {
