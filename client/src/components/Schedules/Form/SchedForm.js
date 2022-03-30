@@ -124,6 +124,7 @@ const SchedForm = ({scheduleId, setScheduleId}) => {
                                 {scheduleId? 
                                 <Select
                                         inputProps={{ readOnly: true }}
+                                        disabled = {true}
                                         className='mb-5 mt-4'
                                         name='day'
                                         required

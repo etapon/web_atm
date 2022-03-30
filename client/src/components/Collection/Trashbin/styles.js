@@ -33,5 +33,9 @@ export default makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center'
+  },
+  cardAction: {
+    display: 'block',
+    textAlign: 'initial',
   }
 }));

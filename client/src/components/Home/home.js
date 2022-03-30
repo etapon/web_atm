@@ -1,9 +1,9 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import './styles.css'
-import imgShowCase1 from './assets/img/segregate.jpg'
-import imgShowCase2 from './assets/img/location_tracking.jpg'
-import imgShowCase3 from './assets/img/bg-showcase-3.jpg'
+import imgShowCase1 from './assets/img/f1.jpg'
+import imgShowCase2 from './assets/img/f2.jpg'
+import imgShowCase3 from './assets/img/f3.jpg'
 
 const Home = () => {
     const nav = useNavigate()

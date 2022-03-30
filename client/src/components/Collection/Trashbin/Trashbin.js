@@ -2,9 +2,8 @@ import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Circle } from 'rc-progress';
 import useStyles from './styles'
-import { CircularProgress, Grid, Paper, AppBar, TextField, Button, Container, Typography} from '@material-ui/core'
-import LocationCityIcon from '@material-ui/icons/LocationOn';
-import ReactMapGL, { FullscreenControl, Marker, GeolocateControl, Popup } from 'react-map-gl'
+import { Grid, Paper, AppBar, Button, Container, Typography} from '@material-ui/core'
+import ReactMapGL, { Marker } from 'react-map-gl'
 import { db } from '../../../utils/firebase';
 import {ref, onValue} from 'firebase/database';
 import truck from './truck.png'

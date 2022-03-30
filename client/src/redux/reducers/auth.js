@@ -1,9 +1,11 @@
-import { AUTH, LOGOUT, USERS, ACTIVATE, COLLECTORS} from '../../components/constants/actionTypes';
+import { AUTH, LOGOUT, USERS, ACTIVATE, COLLECTORS, USER_STREETS} from '../../components/constants/actionTypes';
 
-const authReducer = (state = {allUsers: [], authData: null, collectors: []}, action) => {
+const authReducer = (state = {userStreets:[], allUsers: [], authData: null, collectors: []}, action) => {
     switch(action.type){
         case USERS:
             return { ...state, allUsers: action.payload }
+        case USER_STREETS:
+            return { ...state, userStreets: action.payload }
         case COLLECTORS:
             return { ...state, collectors: action.payload }
         case AUTH:

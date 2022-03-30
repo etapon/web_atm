@@ -28,7 +28,9 @@ app.use('/barangays/', barangayRoutes)
 app.use('/collections/', collectionRoutes)
 
 const PORT = process.env.PORT;
+// const PORT = 5000;
 
 mongoose.connect(process.env.CONNECTION_URL)
     .then(()=> app.listen(PORT, ()=> console.log(`Server running port: ${PORT}`)))
     .catch((error)=> console.log(error));
+

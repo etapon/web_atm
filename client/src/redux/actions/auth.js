@@ -1,4 +1,4 @@
-import { AUTH, USERS, MESSAGE, MESSAGE_TYPE, LOGOUT, ACTIVATE, COLLECTORS } from '../../components/constants/actionTypes'
+import { AUTH, USERS, MESSAGE, MESSAGE_TYPE, LOGOUT, ACTIVATE, COLLECTORS, USER_STREETS } from '../../components/constants/actionTypes'
 import * as api from '../api/index'
 
 export const getUsers = () => async (dispatch) => {
@@ -159,5 +159,14 @@ export const changePassword = (password) => async (dispatch) => {
         }
     } catch (error) {
         console.log(error)
+    }
+}
+
+export const getUserStreets = () => async (dispatch) => {
+    try {
+        const {data} = await api.getUserStreets()
+        dispatch({type: USER_STREETS, payload: data.result})
+    } catch (error) {
+        console.log(error.message)
     }
 }

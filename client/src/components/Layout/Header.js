@@ -68,6 +68,10 @@ const Header = () => {
         setShowNav(true)
     }
 
+    const goToAnalytics = () => {
+        nav('/analytics')
+    }
+
     return (
         <div>
              <nav className="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
@@ -96,7 +100,7 @@ const Header = () => {
                                                 <DropdownMenu>
                                                     <DropdownItem onClick={goToAccount}>Account</DropdownItem>
                                                     {user.result.role == 'admin' ? (<DropdownItem onClick={goToDashBoard}>Dashboard</DropdownItem>):(<></>)}
-                                                    {user.result.role == 'admin' ? (<DropdownItem onClick={goToDashBoard}>Analytics</DropdownItem>):(<></>)}
+                                                    {user.result.role == 'admin' ? (<DropdownItem onClick={goToAnalytics}>Analytics</DropdownItem>):(<></>)}
                                                     {user.result.role == 'admin' ? (<DropdownItem onClick={goToUsers}>Users</DropdownItem>):(<></>)}
                                                     {user.result.role == 'admin' ? (<hr className='dropdown-divider'/>):(<></>)}
                                                     <DropdownItem onClick={handleLogout}>Log Out</DropdownItem>

@@ -24,7 +24,7 @@ export const getUserStreets = async (req, res) => {
             [
                 {$match: { }},
                 {$group: {  _id: "$street", totalUser: {$count: {}}}},
-                {$sort: {totalUser: -1}}
+                {$sort: {_id: -1}}
             ]
         )
         res.json({success: true, result: result})
@@ -55,16 +55,19 @@ export const signin = async (req,res) => {
     const {email, password} = req.body;
     
     try {
+        const trimmedEmail = email.trim();
+
+        const existingUser = await User.findOne({email: trimmedEmail});
         
-        const existingUser = await User.findOne({email});
-        
-        if(!existingUser) return res.json({message: "User doesn't exist.", success: false});
+        if(!existingUser){
+            return res.json({message: "User doesn't exist.", success: false});
+        } 
         
         const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
 
         if(!isPasswordCorrect) return res.json({message: "Invalid credentials", success: false});
 
-        const token = jwt.sign({email: existingUser.email, id: existingUser._id}, process.env.ACTIVATION_TOKEN_SECRET, {expiresIn: '1h'});
+        const token = jwt.sign({email: trimmedEmail, id: existingUser._id}, process.env.ACTIVATION_TOKEN_SECRET, {expiresIn: '1h'});
         res.json({result: existingUser, token, success: true, message: "Successfuly Logged In"});
 
     } catch (error) {
@@ -92,7 +95,7 @@ export const signup = async (req,res) => {
         
         const hashedPassword = await bcrypt.hash(password, 12);
        
-        const result = await User.create({email: email, password: hashedPassword, street: street, name: `${req.body.firstName} ${req.body.lastName}`, image: defaultProfile});
+        const result = await User.create({email: email.trim(), password: hashedPassword, street: street, name: `${req.body.firstName} ${req.body.lastName}`, image: defaultProfile});
         
         const token = jwt.sign( { email: result.email, id: result._id }, process.env.ACTIVATION_TOKEN_SECRET, { expiresIn: "1h" } );
 
