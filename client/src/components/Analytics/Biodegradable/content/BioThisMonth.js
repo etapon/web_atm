@@ -17,7 +17,7 @@ const BioThisMonth = ({bioCountThisMonth}) => {
                             <Typography variant="h6" component="h6">Biodegradables This Month</Typography>
                             <Divider style={{ margin: '5px 0' }} />
                             {/* <img className={classes.media} src={ bio_logo } alt="biodegradable" /> */}
-                            <Typography variant='p'> <strong>{bioCountThisMonth? (bioCountThisMonth): "0"}</strong> kg</Typography>
+                            <Typography variant='h4'> <strong>{bioCountThisMonth? (bioCountThisMonth): "0"}</strong> kg</Typography>
                         </center>
                     </div>
                 </div>

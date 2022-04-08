@@ -1,16 +1,11 @@
 import { BIO_COUNT_TODAY, NON_BIO_COUNT_TODAY, RECYCLABLE_COUNT_TODAY, 
     TOTAL_COLLECTED, BIODEGRADABLE_DYNAMIC, BIO_COUNT_MONTH, BIO_COUNT_YEAR,
     BIO_SORTED, NON_BIODEGRADABLE_DYNAMIC, NON_BIO_COUNT_MONTH, NON_BIO_COUNT_YEAR, 
-    NON_BIO_SORTED, 
-    RECYCLABLE_DYNAMIC,
-    RECYCLABLE_COUNT_MONTH,
-    RECYCLABLE_COUNT_YEAR,
-    RECYCLABLE_SORTED,
-    COLLECTED_COUNT_MONTH,
-    COLLECTED_COUNT_YEAR,
-    COLLECTED_SORTED,
-    COLLECTED_COUNT_TODAY,
-    COLLECTED_WASTE_TYPE} from '../../components/constants/actionTypes'
+    NON_BIO_SORTED, RECYCLABLE_DYNAMIC,RECYCLABLE_COUNT_MONTH,RECYCLABLE_COUNT_YEAR,
+    RECYCLABLE_SORTED,COLLECTED_COUNT_MONTH, COLLECTED_COUNT_YEAR, COLLECTED_SORTED,
+    COLLECTED_COUNT_TODAY, COLLECTED_WASTE_TYPE, COLLECTED_TIME_FRAME, BIODEGRADABLE_TIME_FRAME,
+    NON_BIODEGRADABLE_TIME_FRAME, RECYCLABLE_TIME_FRAME, BIODEGRADABLE_TODAY_REPORT, NON_BIODEGRADABLE_TODAY_REPORT,
+    RECYCLABLE_TODAY_REPORT} from '../../components/constants/actionTypes'
 
 import * as api from '../api/index'
 
@@ -218,5 +213,65 @@ export const getCollectedWasteType = (filter) => async (dispatch) => {
     }
 }
 
+export const getCollectedTimeFrame = (filter) => async (dispatch) => {
+    try {
+        const {data} = await api.getCollectedTimeFrame(filter)
+        dispatch({type: COLLECTED_TIME_FRAME, payload: data.result})
+    } catch (error) {
+        console.log(error.message)
+    }
+}
 
+export const getBiodegradableTimeFrame = (filter) => async (dispatch) => {
+    try {
+        const {data} = await api.getBiodegradableTimeFrame(filter)
+        dispatch({type: BIODEGRADABLE_TIME_FRAME, payload: data.result})
+    } catch (error) {
+        console.log(error.message)
+    }
+}
 
+export const getNonBiodegradableTimeFrame = (filter) => async (dispatch) => {
+    try {
+        const {data} = await api.getNonBiodegradableTimeFrame(filter)
+        dispatch({type: NON_BIODEGRADABLE_TIME_FRAME, payload: data.result})
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+export const getRecyclableTimeFrame = (filter) => async (dispatch) => {
+    try {
+        const {data} = await api.getRecyclableTimeFrame(filter)
+        dispatch({type: RECYCLABLE_TIME_FRAME, payload: data.result})
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+export const getBiodegradableTodayReport = (filter) => async (dispatch) => {
+    try {
+        const {data} = await api.getBiodegradableTodayReport(filter)
+        dispatch({type: BIODEGRADABLE_TODAY_REPORT, payload: data.result})
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+export const getNonBiodegradableTodayReport = (filter) => async (dispatch) => {
+    try {
+        const {data} = await api.getNonBiodegradableTodayReport(filter)
+        dispatch({type: NON_BIODEGRADABLE_TODAY_REPORT, payload: data.result})
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+export const getRecyclableTodayReport = (filter) => async (dispatch) => {
+    try {
+        const {data} = await api.getRecyclableTodayReport(filter)
+        dispatch({type: RECYCLABLE_TODAY_REPORT, payload: data.result})
+    } catch (error) {
+        console.log(error.message)
+    }
+}

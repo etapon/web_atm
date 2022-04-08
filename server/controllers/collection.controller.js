@@ -87,6 +87,34 @@ export const getCollectedSorted= async(req, res) => {
         res.json({success: false, message: error.message})
     }
 }
+// export const getComparativeSorted= async(req, res) => {
+//     try {
+//         const result = await Collection.aggregate(
+//             [
+//                 {$match: {}},
+//                 {$group: {  _id: "$type", date: "$date", totalWeight: {$sum: "$weight"}}},
+//                 {$sort: {_id: 1}}
+//             ]
+//         )
+//         res.json({success: true, result: result})
+//     } catch (error) {
+//         res.json({success: false, message: error.message})
+//     }
+// }
+export const getCollectedTimeFrame = async (req, res) => {
+    try {
+        const result = await Collection.aggregate(
+            [
+                {$match: { "date": {$gte: req.body.from, $lte: req.body.to} }},
+                {$group: { _id: '$date',  totalWeight: {$sum: "$weight"}}},
+                {$sort: {_id: 1}}
+            ]
+        )
+        res.json({success: true, result: result})
+    } catch (error) {
+        res.json({success: false, message: error.message})
+    }
+}
 export const getCollectedWasteType = async(req, res) => {
     const filter = req.body.filter
     console.log(filter)
@@ -367,12 +395,44 @@ export const getBiodegradableDynamic = async (req, res) => {
         res.json({message: error.message, success: false})
     }
 }
+
+export const getBiodegradableTodayReport = async(req,res)=> {
+    try {
+        var date = new Date()
+        var today = formatDate(date);
+        const result = await Collection.aggregate(
+            [
+                {$match: { $and: [{"type": "Biodegradable"}, {"date": today} ] }},
+                {$group: {  _id: "$street", totalWeight: {$sum: "$weight"}}},
+                {$sort: {_id: -1}}
+            ]
+        )
+        res.json({success: true, result: result})
+    } catch (error) {
+        res.json({message: error.message, success: false})
+    }
+}
+
 export const getBiodegradableSorted= async(req, res) => {
     try {
         const result = await Collection.aggregate(
             [
                 {$match: { "type": "Biodegradable" }},
                 {$group: {  _id: "$date", totalWeight: {$sum: "$weight"}}},
+                {$sort: {_id: 1}}
+            ]
+        )
+        res.json({success: true, result: result})
+    } catch (error) {
+        res.json({success: false, message: error.message})
+    }
+}
+export const getBiodegradableTimeFrame = async (req, res) => {
+    try {
+        const result = await Collection.aggregate(
+            [
+                {$match: { $and: [{"type": "Biodegradable"}, {"date": {$gte: req.body.from, $lte: req.body.to}} ] }},
+                {$group: { _id: '$date',  totalWeight: {$sum: "$weight"}}},
                 {$sort: {_id: 1}}
             ]
         )
@@ -502,6 +562,36 @@ export const getNonBiodegradableSorted= async(req, res) => {
         res.json({success: false, message: error.message})
     }
 }
+export const getNonBiodegradableTimeFrame = async (req, res) => {
+    try {
+        const result = await Collection.aggregate(
+            [
+                {$match: { $and: [{"type": "non-Biodegradable"}, {"date": {$gte: req.body.from, $lte: req.body.to}} ] }},
+                {$group: { _id: '$date',  totalWeight: {$sum: "$weight"}}},
+                {$sort: {_id: 1}}
+            ]
+        )
+        res.json({success: true, result: result})
+    } catch (error) {
+        res.json({success: false, message: error.message})
+    }
+}
+export const getNonBiodegradableTodayReport = async(req,res)=> {
+    try {
+        var date = new Date()
+        var today = formatDate(date);
+        const result = await Collection.aggregate(
+            [
+                {$match: { $and: [{"type": "non-Biodegradable"}, {"date": today} ] }},
+                {$group: {  _id: "$street", totalWeight: {$sum: "$weight"}}},
+                {$sort: {_id: -1}}
+            ]
+        )
+        res.json({success: true, result: result})
+    } catch (error) {
+        res.json({message: error.message, success: false})
+    }
+}
 // ==================================== ANALYTICS FOR NON-BIODEGRADABLE ====================================
 
 
@@ -620,6 +710,36 @@ export const getRecyclableSorted= async(req, res) => {
         res.json({success: true, result: result})
     } catch (error) {
         res.json({success: false, message: error.message})
+    }
+}
+export const getRecyclableTimeFrame = async (req, res) => {
+    try {
+        const result = await Collection.aggregate(
+            [
+                {$match: { $and: [{"type": "Recyclable"}, {"date": {$gte: req.body.from, $lte: req.body.to}} ] }},
+                {$group: { _id: '$date',  totalWeight: {$sum: "$weight"}}},
+                {$sort: {_id: 1}}
+            ]
+        )
+        res.json({success: true, result: result})
+    } catch (error) {
+        res.json({success: false, message: error.message})
+    }
+}
+export const getRecyclableTodayReport = async(req,res)=> {
+    try {
+        var date = new Date()
+        var today = formatDate(date);
+        const result = await Collection.aggregate(
+            [
+                {$match: { $and: [{"type": "Recyclable"}, {"date": today} ] }},
+                {$group: {  _id: "$street", totalWeight: {$sum: "$weight"}}},
+                {$sort: {_id: -1}}
+            ]
+        )
+        res.json({success: true, result: result})
+    } catch (error) {
+        res.json({message: error.message, success: false})
     }
 }
 // ==================================== ANALYTICS FOR RECYCLABLES ====================================

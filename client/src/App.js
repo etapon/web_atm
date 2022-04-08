@@ -22,7 +22,7 @@ import ScheduleDetails from './components/Schedules/ScheduleDetails/ScheduleDeta
 import SchedForm from './components/Schedules/Form/SchedForm'
 import ScheduleForm from './components/Schedules/Form/ScheduleForm'
 import Dashboard from './components/Dashboard/Dashboard'
-
+import Reports from './components/Reports/Reports'
 import Announcements from './components/Announcements/Announcements'
 import AnnouncementForm from './components/Announcements/Form/AnnouncementForm'
 import { ToastProvider, useToasts, DefaultToast } from 'react-toast-notifications'
@@ -34,6 +34,8 @@ import NonBiodegradable_Analytics from './components/Analytics/NonBiodegradable/
 import Recyclable_Analytics from './components/Analytics/Recyclable/Recyclable_Analytics'
 import Total_Analytics from './components/Analytics/Total/Total_Analytics'
 import Analytics from './components/Analytics/Analytics'
+
+import ScheduleDisplay from './components/Schedules/ScheduleDisplay'
 
 const App = () => {
     const [scheduleId, setScheduleId] = useState('')
@@ -61,14 +63,14 @@ const App = () => {
                  
                 <Routes>
                     <Route path='/' element={<Home/>}/>
-                    <Route path='/apppage' element={<AppPage/>}/>
+                    <Route path='/apppage' element={user? <AppPage/>: <Auth/> }/>
                     <Route path='/auth' element={<Auth/>}/>
                     {/* <Route path='/activate/:token' element={<Welcome/>}/> */}
                     
                         <Route path='/users' element={<Users/>}/>
                         <Route path='/account' element={<Account/>}/>
 
-                        <Route path='/schedules' element={user? <Schedules setScheduleId={setScheduleId} />: <Auth/> } />
+                        <Route path='/schedules' element={<Schedules setScheduleId={setScheduleId} />}/>
                         <Route path='/schedule/:id' element={user? <ScheduleDetails/>: <Auth/>}/>
                         <Route path='/schedulesForm' element={user? <ScheduleForm scheduleId={scheduleId} setScheduleId={setScheduleId}/>: <Auth/>}/>
                         <Route path='/schedForm' element={user? <SchedForm scheduleId={scheduleId} setScheduleId={setScheduleId}/>: <Auth/>}/>
@@ -87,8 +89,11 @@ const App = () => {
                         <Route path='/recyclable_analytics' element={user? <Recyclable_Analytics/>: <Auth/>}/>
                         <Route path='/total_analytics' element={user? <Total_Analytics/>: <Auth/>}/>
 
+                        <Route path='/reports' element={user? <Reports/>: <Auth/>}/>
+                        <Route path='/scheduledisplay' element={<ScheduleDisplay/>}/>
                 </Routes>
-
+                
+            
             </BrowserRouter>
         </div>
     )

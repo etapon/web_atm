@@ -62,12 +62,13 @@ const CollectionStreet = ({totalCollected}) => {
                           
                             <Typography variant="h6" component="h6">Collected Today (per street)</Typography>
                             <Divider style={{ margin: '5px 0' }} />
-                            <div style={{width: '45vw'}}>
-                              <Bar data={data} 
+                            <div style={{width: '65vw'}}>
+                              <Bar data={data}
                                 options={{
-                                  maintainAspectRatio: false
+                                  maintainAspectRatio: false,
+                                  indexAxis: 'y' 
                                 }}
-                                height={450}
+                                height={600}
                                 width={600}
                               />
                             </div>

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import useStyles from './styles'
 import { Typography, Paper, Divider, ButtonBase } from '@material-ui/core'
 import noCollection from './no_collection.png'
-
+import collection from './collection.png'
 import { db } from '../../../utils/firebase';
 import {ref, onValue} from 'firebase/database';
 
@@ -14,8 +14,6 @@ const CollectionStatus = () => {
 
     const [ binPercentage, setBinPercentage ] = useState();
     const [ binCurrentWeight, setBinCurrentWeight ] = useState();
-    const [ collectorLat, setCollectorLat ] = useState();
-    const [ collectorLong, setCollectorLong ] = useState();
     const [ active, setActive ] = useState(false)
     const [ wasteType, setWasteType ] = useState()
     const [ street, setStreet ] = useState()
@@ -34,11 +32,6 @@ const CollectionStatus = () => {
                 setBinCurrentWeight(converted)
             }
 
-            const loc = snapshot.child('loc').val()
-            if(loc !== null){
-                setCollectorLat(loc.lat)
-                setCollectorLong(loc.long)
-            }
 
             const activeStatus = snapshot.child('activeStatus').val()
             if(activeStatus === 'active'){
@@ -75,16 +68,16 @@ const CollectionStatus = () => {
                                 <Typography variant="h6" component="h6">Collection Status</Typography>
                                 <Divider style={{ margin: '5px 0' }} />
                                 {active? <>
-                                    <div  style={{height: '450px', padding: "50px"}}>
+                                        <img src={collection} className={classes.media} alt='no_collection'/>
                                         <Typography variant="h6">Currently collecting on: <strong>{street}</strong></Typography>
                                         <Typography variant="h6">Waste Type: <strong>{wasteType}</strong></Typography>
                                         <Typography variant="h6">Current Load: <strong>{binCurrentWeight}</strong> kg</Typography>
-                                    </div>
+                                   
                                 </> :
-                                    <div  style={{height: '450px', padding: "50px"}}>
-                                        <img src={noCollection} alt='no_collection' sytle={{height: '50'}}/>
-                                        <Typography variant="p"> No Active Collector </Typography>
-                                    </div>
+                                    <>
+                                        <img src={noCollection} className={classes.media} alt='no_collection'/>
+                                        <Typography variant="p"> <strong>No Active Collector</strong> </Typography>
+                                    </>
                                 }
                             </center>
                         </div>

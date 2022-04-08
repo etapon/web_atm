@@ -1,6 +1,6 @@
-import { AUTH, LOGOUT, USERS, ACTIVATE, COLLECTORS, USER_STREETS} from '../../components/constants/actionTypes';
+import { AUTH, LOGOUT, USERS, ACTIVATE, COLLECTORS, USER_STREETS, RESIDENT_COUNT} from '../../components/constants/actionTypes';
 
-const authReducer = (state = {userStreets:[], allUsers: [], authData: null, collectors: []}, action) => {
+const authReducer = (state = {userStreets:[], allUsers: [], authData: null, collectors: [], residentCount: null}, action) => {
     switch(action.type){
         case USERS:
             return { ...state, allUsers: action.payload }
@@ -17,6 +17,8 @@ const authReducer = (state = {userStreets:[], allUsers: [], authData: null, coll
         case LOGOUT:
             localStorage.clear();
             return {...state, authData: null}
+        case RESIDENT_COUNT:
+            return {...state, residentCount: action.payload}
         default:
             return state;
     }

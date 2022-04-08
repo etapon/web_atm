@@ -21,10 +21,10 @@ const Recyclable_Analytics = () => {
 
     useEffect(()=> {
         const interval = setInterval(() => {
+            dispatch(getRecyclableSorted())
             dispatch(getRecyclablesToday())
             dispatch(getRecyclablesThisMonth())
             dispatch(getRecyclablesThisYear())
-            dispatch(getRecyclableSorted())
           }, 1000);
           return () => clearInterval(interval);
     })

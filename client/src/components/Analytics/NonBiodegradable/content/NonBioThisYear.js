@@ -14,7 +14,7 @@ const NonBioThisYear = ({nonBioCountThisYear}) => {
                 <div className={classes.card}>
                     <div className={classes.section}>
                         <center>
-                            <Typography variant="h6" component="h6">Biodegradables This Year</Typography>
+                            <Typography variant="h6" component="h6">non-Biodegradables This Year</Typography>
                             <Divider style={{ margin: '5px 0' }} />
                             {/* <img className={classes.media} src={ bio_logo } alt="biodegradable" /> */}
                             <Typography variant='p'> <strong>{nonBioCountThisYear? (nonBioCountThisYear): "0"}</strong> kg</Typography>

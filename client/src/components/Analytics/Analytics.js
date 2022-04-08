@@ -12,6 +12,11 @@ import BioRecord from './Biodegradable/content/BioRecord'
 import NonBioRecord from './NonBiodegradable/content/NonBioRecord'
 import RecyclableRecord from './Recyclable/content/RecyclableRecord'
 import CollectedRecord from './Total/content/CollectedRecord'
+import CollectedTimeFrame from './Total/content/CollectedTimeFrame'
+import BiodegradableTimeFrame from './Biodegradable/content/BiodegradableTimeFrame'
+import NonBiodegradableTimeFrame from './NonBiodegradable/content/NonBiodegradableTimeFrame'
+import RecyclableTimeFrame from './Recyclable/content/RecyclableTimeFrame'
+import Comparative from './Comparative'
 
 import { getBiodegradableSorted, getNonBiodegradableSorted, getRecyclableSorted, getCollectedSorted } from '../../redux/actions/collection'
 
@@ -24,10 +29,10 @@ const Analytics = () => {
     useEffect(()=>{
 
         const interval = setInterval(() => {
+            dispatch(getCollectedSorted())
             dispatch(getBiodegradableSorted())
             dispatch(getNonBiodegradableSorted())
             dispatch(getRecyclableSorted())
-            dispatch(getCollectedSorted())
           }, 1000);
           return () => clearInterval(interval);
     })
@@ -81,22 +86,32 @@ const Analytics = () => {
                                 <BioPerStreet/>
                                 <Divider style={{ margin: '10px 0' }} />
                                 <BioRecord bioSorted={bioSorted}/>
+                                <Divider style={{ margin: '10px 0' }} />
+                                <BiodegradableTimeFrame/>
                         </>:null}
 
                         {byNonBioVariant == "outlined"? <>
                             <NonBioPerStreet/>
                             <Divider style={{ margin: '10px 0' }} />
                             <NonBioRecord nonBioSorted={nonBioSorted}/>
+                            <Divider style={{ margin: '10px 0' }} />
+                            <NonBiodegradableTimeFrame/>
                         </>:null}
                         {byRecyclableVariant == "outlined"? <>
                             <RecyclablePerStreet/>
                             <Divider style={{ margin: '10px 0' }} />
                             <RecyclableRecord recyclableSorted={recyclableSorted}/>
+                            <Divider style={{ margin: '10px 0' }} />
+                            <RecyclableTimeFrame/>
                         </>:null}
                         {byCollectionVariant == "outlined"? <>
                             <CollectedWasteType/>
                             <Divider style={{ margin: '10px 0' }} />
                             <CollectedRecord collectedSorted={collectedSorted}/>
+                            <Divider style={{ margin: '10px 0' }} />
+                            <CollectedTimeFrame/>
+                            {/* <Divider style={{ margin: '10px 0' }} />
+                            <Comparative/> */}
                         </>:null}
                     </div>
                     

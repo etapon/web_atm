@@ -1,4 +1,4 @@
-import { AUTH, USERS, MESSAGE, MESSAGE_TYPE, LOGOUT, ACTIVATE, COLLECTORS, USER_STREETS } from '../../components/constants/actionTypes'
+import { AUTH, USERS, MESSAGE, MESSAGE_TYPE, LOGOUT, ACTIVATE, COLLECTORS, USER_STREETS, RESIDENT_COUNT } from '../../components/constants/actionTypes'
 import * as api from '../api/index'
 
 export const getUsers = () => async (dispatch) => {
@@ -16,6 +16,15 @@ export const getCollectors = () => async (dispatch) => {
     try {
         const {data} = await api.getCollectors();
         dispatch({type: COLLECTORS, payload: data});
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getResidentCount = () => async (dispatch) => {
+    try {
+        const {data} = await api.getResidentCount()
+        dispatch({type: RESIDENT_COUNT, payload: data.result})
     } catch (error) {
         console.log(error)
     }

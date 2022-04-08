@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-// const API = axios.create({baseURL: 'https://e-tapon-project.herokuapp.com'})
-const API = axios.create({baseURL: 'http://localhost:5000'})
+const API = axios.create({baseURL: 'https://e-tapon-project.herokuapp.com'})
+// const API = axios.create({baseURL: 'http://localhost:5000'})
 
 
 API.interceptors.request.use((req)=> {
@@ -64,4 +64,14 @@ export const getCollectedThisYear = () => API.get(`/collections/getCollectedThis
 export const getCollectedSorted = () => API.get(`/collections/getCollectedSorted`)
 export const getCollectedWasteType = (filter) => API.post(`collections/getCollectedWasteType`, filter)
 
+export const getCollectedTimeFrame = (filter) => API.post(`/collections/getCollectedTimeFrame`, filter)
+export const getBiodegradableTimeFrame = (filter) => API.post(`/collections/getBiodegradableTimeFrame`, filter)
+export const getNonBiodegradableTimeFrame = (filter) => API.post(`/collections/getNonBiodegradableTimeFrame`, filter)
+export const getRecyclableTimeFrame = (filter) => API.post(`/collections/getRecyclableTimeFrame`, filter)
+
 export const getSchedToday = () => API.get(`/schedules/getSchedToday`)
+export const getResidentCount = () => API.get(`/users/getResidentCount`)
+
+export const getBiodegradableTodayReport = () => API.get(`/collections/getBiodegradableTodayReport`)
+export const getNonBiodegradableTodayReport = () => API.get(`/getNonBiodegradableTodayReport`)
+export const getRecyclableTodayReport = () => API.get(`/getNonBiodegradableTodayReport`)

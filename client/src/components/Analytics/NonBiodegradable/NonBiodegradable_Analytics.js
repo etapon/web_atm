@@ -21,10 +21,10 @@ const NonBiodegradable_Analytics = () => {
 
     useEffect(()=> {
         const interval = setInterval(() => {
+            dispatch(getNonBiodegradableSorted())
             dispatch(getNonBiodegradablesToday())
             dispatch(getNonBiodegradablesThisMonth())
             dispatch(getNonBiodegradablesThisYear())
-            dispatch(getNonBiodegradableSorted())
           }, 1000);
           return () => clearInterval(interval);
     })

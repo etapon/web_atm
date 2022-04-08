@@ -72,6 +72,10 @@ const Header = () => {
         nav('/analytics')
     }
 
+    const goToReports = () => {
+        nav('/reports')
+    }
+
     return (
         <div>
              <nav className="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
@@ -84,9 +88,10 @@ const Header = () => {
                         {showNav? <>
                             <ul className="navbar-nav ms-auto">
                             <li className="nav-item mx-0 mx-lg-1 mt-2"><Link className="nav-link py-3 px-0 px-lg-3 rounded" to="/">Home</Link></li>
-                            {user ? (<><li className="nav-item mx-0 mx-lg-1 mt-2"><Link className="nav-link py-3 px-0 px-lg-3 rounded" to="/schedules">Schedules</Link></li> 
-                            <li className="nav-item mx-0 mx-lg-1 mt-2"><Link className="nav-link py-3 px-0 px-lg-3 rounded" to="/announcements">Announcements</Link></li>
-                            <li className="nav-item mx-0 mx-lg-1 mt-2"><Link className="nav-link py-3 px-0 px-lg-3 rounded" to="/trashbin">Collection</Link></li></>):(<></>)}
+                            <li className="nav-item mx-0 mx-lg-1 mt-2"><Link className="nav-link py-3 px-0 px-lg-3 rounded" to="/scheduledisplay">Today</Link></li>
+                            <li className="nav-item mx-0 mx-lg-1 mt-2"><Link className="nav-link py-3 px-0 px-lg-3 rounded" to="/schedules">Schedules</Link></li>
+                            {user ? (<><li className="nav-item mx-0 mx-lg-1 mt-2"><Link className="nav-link py-3 px-0 px-lg-3 rounded" to="/announcements">Announcements</Link></li>
+                            </>):(<></>)}
                             {user? (
                             <>
                                 <li className="nav-item mx-0 mx-lg-1">
@@ -101,6 +106,7 @@ const Header = () => {
                                                     <DropdownItem onClick={goToAccount}>Account</DropdownItem>
                                                     {user.result.role == 'admin' ? (<DropdownItem onClick={goToDashBoard}>Dashboard</DropdownItem>):(<></>)}
                                                     {user.result.role == 'admin' ? (<DropdownItem onClick={goToAnalytics}>Analytics</DropdownItem>):(<></>)}
+                                                    {user.result.role == 'admin' ? (<DropdownItem onClick={goToReports}>Reports</DropdownItem>):(<></>)}
                                                     {user.result.role == 'admin' ? (<DropdownItem onClick={goToUsers}>Users</DropdownItem>):(<></>)}
                                                     {user.result.role == 'admin' ? (<hr className='dropdown-divider'/>):(<></>)}
                                                     <DropdownItem onClick={handleLogout}>Log Out</DropdownItem>

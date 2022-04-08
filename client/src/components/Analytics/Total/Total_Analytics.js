@@ -9,7 +9,6 @@ import CollectedThisMonth from './content/CollectedThisMonth'
 import CollectedThisYear from './content/CollectedThisYear'
 import CollectedRecord from './content/CollectedRecord' 
 import CollectedWasteType from './content/CollectedWasteType'
-
 import { getCollectedToday, getCollectedThisMonth, getCollectedThisYear, getCollectedSorted } from '../../../redux/actions/collection'
 
 const Total_Analytics = () => {

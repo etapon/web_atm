@@ -5,7 +5,9 @@ import { createCollection, getCollections,
     getBiodegradablesThisYear, getBiodegradableSorted, getNonBiodegradableDynamic,
     getNonBiodegradableThisMonth, getNonBiodegradablesThisYear, getNonBiodegradableSorted,
     getRecyclableDynamic, getRecyclablesThisMonth, getRecyclablesThisYear, getRecyclableSorted, getCollectedToday,
-    getCollectedThisMonth, getCollectedThisYear, getCollectedSorted, getCollectedWasteType } from '../controllers/collection.controller.js';
+    getCollectedThisMonth, getCollectedThisYear, getCollectedSorted, getCollectedWasteType, getCollectedTimeFrame,
+    getBiodegradableTimeFrame, getNonBiodegradableTimeFrame, getRecyclableTimeFrame, getBiodegradableTodayReport,
+    getNonBiodegradableTodayReport, getRecyclableTodayReport } from '../controllers/collection.controller.js';
 
 const router = express.Router()
 
@@ -38,4 +40,13 @@ router.get('/getCollectedThisYear', getCollectedThisYear)
 router.get('/getCollectedSorted', getCollectedSorted)
 router.post('/getCollectedWasteType', getCollectedWasteType)
 
+router.post('/getCollectedTimeFrame', getCollectedTimeFrame)
+router.post('/getBiodegradableTimeFrame', getBiodegradableTimeFrame)
+router.post('/getNonBiodegradableTimeFrame', getNonBiodegradableTimeFrame)
+router.post('/getRecyclableTimeFrame', getRecyclableTimeFrame)
+// router.get('/getComparativeSorted', getComparativeSorted)
+
+router.get('/getBiodegradableTodayReport', getBiodegradableTodayReport)
+router.get('/getNonBiodegradableTodayReport', getNonBiodegradableTodayReport)
+router.get('/getRecyclableTodayReport', getRecyclableTodayReport)
 export default router;

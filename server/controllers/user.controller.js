@@ -33,6 +33,15 @@ export const getUserStreets = async (req, res) => {
     }
 }
 
+export const getResidentCount = async (req, res) => {
+    try {
+        const userCount = await User.count({role: "resident"})
+        res.json({sucess: true, result: userCount})
+    } catch (error) {
+        res.json({message: error.message, success: false})
+    }
+}
+
 export const getUsers = async (req, res) => {
     try {
         const users = await User.find();
@@ -67,7 +76,7 @@ export const signin = async (req,res) => {
 
         if(!isPasswordCorrect) return res.json({message: "Invalid credentials", success: false});
 
-        const token = jwt.sign({email: trimmedEmail, id: existingUser._id}, process.env.ACTIVATION_TOKEN_SECRET, {expiresIn: '1h'});
+        const token = jwt.sign({email: trimmedEmail, id: existingUser._id}, process.env.ACTIVATION_TOKEN_SECRET, {expiresIn: '1d'});
         res.json({result: existingUser, token, success: true, message: "Successfuly Logged In"});
 
     } catch (error) {
@@ -97,7 +106,7 @@ export const signup = async (req,res) => {
        
         const result = await User.create({email: email.trim(), password: hashedPassword, street: street, name: `${req.body.firstName} ${req.body.lastName}`, image: defaultProfile});
         
-        const token = jwt.sign( { email: result.email, id: result._id }, process.env.ACTIVATION_TOKEN_SECRET, { expiresIn: "1h" } );
+        const token = jwt.sign( { email: result.email, id: result._id }, process.env.ACTIVATION_TOKEN_SECRET, { expiresIn: "1d" } );
 
         res.json({message:"Succesfully Signed Up", success: true, result: result, token: token})
         

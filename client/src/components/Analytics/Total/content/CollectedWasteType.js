@@ -116,14 +116,14 @@ const RecyclablePerStreet = () => {
                         
                         <center>
                         <div style={{width: '90vw'}}>
-                              <Pie data={data} 
+                            <Pie data={data} 
                                 options={{
-                                  maintainAspectRatio: false
+                                maintainAspectRatio: false
                                 }}
                                 height={400}
                                 width={900}
-                              />
-                            </div>
+                            />
+                        </div>
                         </center>
                     </div>
                 </div>

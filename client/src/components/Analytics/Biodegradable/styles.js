@@ -10,7 +10,9 @@ export default makeStyles((theme) => ({
     margin: '30px 0',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    padding: "8px",
+    textAlign: "center"
   }
   
 }));

@@ -5,6 +5,8 @@ import imgShowCase1 from './assets/img/f1.jpg'
 import imgShowCase2 from './assets/img/f2.jpg'
 import imgShowCase3 from './assets/img/f3.jpg'
 
+import Footer from '../Layout/Footer'
+
 const Home = () => {
     const nav = useNavigate()
 
@@ -102,6 +104,7 @@ const Home = () => {
             </div>
         </section>
         </section>
+        <Footer/>
         </div>
     )
 }

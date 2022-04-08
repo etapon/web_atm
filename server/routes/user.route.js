@@ -1,10 +1,12 @@
 import express from 'express';
 
-import { signin, signup, getUserCount, getUserStreets, getUsers, updateUser, deleteUser, updateImage, updateCredentials,changePassword, getCollectors } from '../controllers/user.controller.js';
+import { signin, signup, getUserCount, getUserStreets, getUsers, updateUser, deleteUser, updateImage, 
+    updateCredentials,changePassword, getCollectors, getResidentCount } from '../controllers/user.controller.js';
 
 const router = express.Router();
 
 router.get('/userCount', getUserCount)
+router.get('/getResidentCount', getResidentCount)
 router.get('/userStreets', getUserStreets)
 
 router.get('/', getUsers)

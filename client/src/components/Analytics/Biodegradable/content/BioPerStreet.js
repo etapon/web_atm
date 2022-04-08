@@ -117,7 +117,14 @@ const BioPerStreet = () => {
                         <div style={{width: '90vw'}}>
                               <Bar data={data} 
                                 options={{
-                                  maintainAspectRatio: false
+                                  maintainAspectRatio: false,
+                                  plugins: {
+                                    datalabels: {
+                                      formatter: (val) => {
+                                        return val + ' kg';
+                                      }
+                                    }
+                                  }
                                 }}
                                 height={400}
                                 width={900}

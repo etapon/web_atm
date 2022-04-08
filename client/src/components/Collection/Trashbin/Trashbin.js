@@ -100,10 +100,10 @@ const Trashbin = () => {
                         <Grid item xs={12} lg={12}>
                             <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
                             <ReactMapGL
-                                mapStyle='mapbox://styles/dagzue25/ckyll6k1vjm8115nuyctict7l'
+                                mapStyle='mapbox://styles/etapon/cl1jmki7b009o15qsg5dfegwl'
                                 
                                 {...viewport}
-                                mapboxApiAccessToken="pk.eyJ1IjoiZGFnenVlMjUiLCJhIjoiY2t5aXB4ZGUxMXV3YzJwbGtrZzV2c3A1eCJ9.N1NJsWrEJAuCbOlxol71IA"
+                                mapboxApiAccessToken="pk.eyJ1IjoiZXRhcG9uIiwiYSI6ImNrejlhaHZ2ODFwOGMycnA0MGFyY3huN3MifQ.q9-oOru792YFjE9lp0SGFQ"
                                 onViewportChange={nextViewport => setViewport(nextViewport)}>
                                     {collectorLat && collectorLong ? (<Marker latitude={collectorLat} longitude={collectorLong}>
                                         <img src={truck} alt='truck' style={{width:viewport.zoom*3 ,cursor:'pointer'}}/>
