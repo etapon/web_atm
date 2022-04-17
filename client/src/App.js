@@ -14,7 +14,6 @@ import Header from './components/Layout/Header'
 import Footer from './components/Layout/Footer'
 
 import Auth from './components/Auth/Auth'
-import Welcome from './components/Auth/Welcome'
 import Users from './components/Users/Users'
 import Account from './components/Users/Account'
 import Schedules from './components/Schedules/Schedules'
@@ -36,6 +35,9 @@ import Total_Analytics from './components/Analytics/Total/Total_Analytics'
 import Analytics from './components/Analytics/Analytics'
 
 import ScheduleDisplay from './components/Schedules/ScheduleDisplay'
+import Verification from './components/Auth/Verification'
+import GoToEmail from './components/Auth/goToEmail'
+import WasteTypes from './components/Home/WasteTypes/WasteTypes'
 
 const App = () => {
     const [scheduleId, setScheduleId] = useState('')
@@ -91,6 +93,9 @@ const App = () => {
 
                         <Route path='/reports' element={user? <Reports/>: <Auth/>}/>
                         <Route path='/scheduledisplay' element={<ScheduleDisplay/>}/>
+                        <Route path='/user/:id/verify/:token' element={<Verification/>} />
+                        <Route path='/goToEmail' element={<GoToEmail/>}/>
+                        <Route path='/wasteTypes' element={<WasteTypes/>}/>
                 </Routes>
                 
             

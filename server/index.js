@@ -10,6 +10,7 @@ import userRoutes from './routes/user.route.js'
 import scheduleRoutes from './routes/schedule.route.js'
 import barangayRoutes from './routes/barangay.route.js'
 import collectionRoutes from './routes/collection.route.js'
+import complaintRoutes from './routes/complaint.route.js'
 
 const app = express()
 dotenv.config()
@@ -26,6 +27,7 @@ app.use('/announcements', announcementRoutes)
 app.use('/schedules', scheduleRoutes)
 app.use('/barangays/', barangayRoutes)
 app.use('/collections/', collectionRoutes)
+app.use('/complaints/', complaintRoutes)
 
 const PORT = process.env.PORT;
 // const PORT = 5000;

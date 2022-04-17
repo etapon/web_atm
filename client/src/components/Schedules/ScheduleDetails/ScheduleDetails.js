@@ -16,7 +16,6 @@ const ScheduleDetails = () => {
     const { schedule, isLoading } = useSelector((state) => state.schedule)
 
     useEffect(()=> {
-        console.log("hey hey hey na receive naman yung id oh")
         dispatch(getSchedule(id))
     }, [id])
 

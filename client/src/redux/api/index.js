@@ -75,3 +75,5 @@ export const getResidentCount = () => API.get(`/users/getResidentCount`)
 export const getBiodegradableTodayReport = () => API.get(`/collections/getBiodegradableTodayReport`)
 export const getNonBiodegradableTodayReport = () => API.get(`/getNonBiodegradableTodayReport`)
 export const getRecyclableTodayReport = () => API.get(`/getNonBiodegradableTodayReport`)
+
+export const verify = (id, token) => API.get(`/users/${id}/verify/${token}`)

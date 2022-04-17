@@ -1,4 +1,7 @@
 import mongoose from 'mongoose';
+import moment from 'moment-timezone'
+
+const datePhilippines = moment.tz(Date.now(), "Asia/Manila")
 
 const announcementSchema = mongoose.Schema({
     creator: String,
@@ -11,13 +14,9 @@ const announcementSchema = mongoose.Schema({
     profile: {
         type: String
     },
-    likes: {
-        type: [String],
-        default: []
-    },
     createdAt: {
         type: Date,
-        default: new Date()
+        default: datePhilippines
     }
 });
 

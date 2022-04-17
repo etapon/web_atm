@@ -87,20 +87,7 @@ export const getCollectedSorted= async(req, res) => {
         res.json({success: false, message: error.message})
     }
 }
-// export const getComparativeSorted= async(req, res) => {
-//     try {
-//         const result = await Collection.aggregate(
-//             [
-//                 {$match: {}},
-//                 {$group: {  _id: "$type", date: "$date", totalWeight: {$sum: "$weight"}}},
-//                 {$sort: {_id: 1}}
-//             ]
-//         )
-//         res.json({success: true, result: result})
-//     } catch (error) {
-//         res.json({success: false, message: error.message})
-//     }
-// }
+
 export const getCollectedTimeFrame = async (req, res) => {
     try {
         const result = await Collection.aggregate(

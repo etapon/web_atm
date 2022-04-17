@@ -154,9 +154,10 @@ export const getSchedulesBySearch = async (req, res) => {
 
 export const getSchedToday = async (req, res) => {
     try {
-        let weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][new Date().getDay()]
-
-        const schedule = await Sched.find({day: weekday})
+        const locale = 'ph';
+        const day = new Date().toLocaleDateString(locale, { weekday: 'long' });
+        
+        const schedule = await Sched.find({day: day})
 
         res.json({result: schedule, success: true})
     } catch (error) {

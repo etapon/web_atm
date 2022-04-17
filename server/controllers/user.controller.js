@@ -3,6 +3,8 @@ import jwt from 'jsonwebtoken';
 import User from '../models/user.model.js';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv'
+import Token from '../models/token.model.js'
+import {sendEmail} from '../utils/sendEmail.js'
 
 import {sendMail} from './sendMail.js';
 import { defaultProfile } from './defaultResources.js';
@@ -65,8 +67,33 @@ export const signin = async (req,res) => {
     
     try {
         const trimmedEmail = email.trim();
+        
+        const isVerified = await User.findOne({email: trimmedEmail, verified: true});
 
         const existingUser = await User.findOne({email: trimmedEmail});
+        
+        
+
+        if(!isVerified){
+            
+            let findToken = await Token.findOne({userId: existingUser._id})
+            if(!findToken){
+                console.log("hindi to verified")
+                const token = jwt.sign({email: trimmedEmail, id: existingUser._id}, process.env.ACTIVATION_TOKEN_SECRET, {expiresIn: '1d'});
+                
+                const newToken = await Token.create({
+                    userId: existingUser._id,
+                    token: token
+                })
+                const url = `${process.env.BASE_URL}/user/${existingUser._id}/verify/${token}`
+
+                await sendEmail(email, "Verify Email", url)
+                return res.json({message: "please check your email", success: false})
+            }
+            return res.json({message: "user not verified, please check your email", success: false})
+        }
+
+        
         
         if(!existingUser){
             return res.json({message: "User doesn't exist.", success: false});
@@ -107,8 +134,17 @@ export const signup = async (req,res) => {
         const result = await User.create({email: email.trim(), password: hashedPassword, street: street, name: `${req.body.firstName} ${req.body.lastName}`, image: defaultProfile});
         
         const token = jwt.sign( { email: result.email, id: result._id }, process.env.ACTIVATION_TOKEN_SECRET, { expiresIn: "1d" } );
+        
+        const newToken = await Token.create({
+            userId: result._id,
+            token: token
+        })
 
-        res.json({message:"Succesfully Signed Up", success: true, result: result, token: token})
+        const url = `${process.env.BASE_URL}/user/${result._id}/verify/${token}`
+
+        await sendEmail(result.email, "Verify Email", url)
+
+        res.json({message:"An Email sent to your account please verify", success: true, result: result, token: token})
         
         
         // const token = jwt.sign({email, password: hashedPassword, street: street, name: `${firstName} ${lastName}`}, process.env.ACTIVATION_TOKEN_SECRET, {expiresIn: '1h'});
@@ -122,6 +158,22 @@ export const signup = async (req,res) => {
         // res.json({message: "your one step closer! please check your email and activate your account", success: true});
     } catch (error) {
         res.json({message: error.message, success: false});
+    }
+}
+
+export const verifyUser = async (req, res) => {
+    try {
+        const existingUser = await User.findOne({_id: req.params.id});
+        if(!existingUser) return res.json({message: "Invalid Link", success: false})
+
+        const token = await Token.findOne({userId: existingUser._id, token: req.params.token})
+        if(!token) return res.json({message: "Invalid Link", success: false})
+
+        await existingUser.updateOne({verified: true})
+        await token.remove()
+        res.json({message: "Email successfuly verified", success: true})
+    } catch (error) {
+        res.json({message: error.message, success: false})
     }
 }
 
@@ -153,9 +205,9 @@ export const updateUser = async (req, res) => {
                 "role": req.body.role
             }
         }, {new:true})
-        return res.status(200).json({result: updateUser});
+        return res.status(200).json({result: updateUser, message: "user successfully modified", success: true});
     } catch (error) {
-        console.log(error)
+        res.json({message: error.message, success: false})
     }
 }
 
@@ -165,9 +217,9 @@ export const deleteUser = async (req, res) => {
     try {
         if(!mongoose.Types.ObjectId.isValid(req.body._id)) return res.status(404).send('No user found')
         await User.findByIdAndRemove(req.body._id);
-        res.json({message: 'User succesfully deleted'})
+        res.json({message: 'User succesfully deleted', success: true})
     } catch (error) {
-        console.log(error);
+        res.json({message: error.message, success: false})
     }
 }
 

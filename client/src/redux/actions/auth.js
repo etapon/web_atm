@@ -1,4 +1,4 @@
-import { AUTH, USERS, MESSAGE, MESSAGE_TYPE, LOGOUT, ACTIVATE, COLLECTORS, USER_STREETS, RESIDENT_COUNT } from '../../components/constants/actionTypes'
+import { AUTH, USERS, MESSAGE, MESSAGE_TYPE, LOGOUT, ACTIVATE, COLLECTORS, USER_STREETS, RESIDENT_COUNT, VERIFICATION } from '../../components/constants/actionTypes'
 import * as api from '../api/index'
 
 export const getUsers = () => async (dispatch) => {
@@ -76,13 +76,12 @@ export const signup = (formData, nav) => async (dispatch) => {
             const msg = data.message
             dispatch({type: MESSAGE_TYPE, payload: 'error'})
             dispatch({type: MESSAGE, payload: msg})
-            
         } else{
             const msg = data.message
             dispatch({type: MESSAGE_TYPE, payload: 'success'})
             dispatch({type: MESSAGE, payload: msg})
-            dispatch({type: AUTH, data})
-            nav('/')
+            // dispatch({type: AUTH, data})
+            nav('/goToEmail')
         }
         
     } catch (error) {
@@ -90,9 +89,32 @@ export const signup = (formData, nav) => async (dispatch) => {
     }
 }
 
-export const activate = (token, nav) => async(dispatch) => {
+// export const activate = (token, nav) => async(dispatch) => {
+//     try {
+//         const {data} = await api.activate(token)
+        // const msg = data.message
+        // if(data.success == false){
+        //     const msg = data.message
+        //     dispatch({type: MESSAGE_TYPE, payload: 'error'})
+        //     dispatch({type: MESSAGE, payload: msg})
+            
+        // } else{
+        //     const msg = data.message
+        //     const profile = data.result
+        //     dispatch({type: MESSAGE_TYPE, payload: 'success'})
+        //     dispatch({type: MESSAGE, payload: msg})
+        //     nav('/')
+        // }
+        
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
+
+export const verify = (id, token) => async(dispatch) => {
     try {
-        const {data} = await api.activate(token)
+        const {data} = await api.verify(id, token)
+
         const msg = data.message
         if(data.success == false){
             const msg = data.message
@@ -104,11 +126,10 @@ export const activate = (token, nav) => async(dispatch) => {
             const profile = data.result
             dispatch({type: MESSAGE_TYPE, payload: 'success'})
             dispatch({type: MESSAGE, payload: msg})
-            nav('/')
+            dispatch({type: VERIFICATION, payload: data})
         }
-        
     } catch (error) {
-        console.log(error)
+        console.log(error.message)
     }
 }
 

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {useLocation} from 'react-router-dom'
-import { AppBar, Container, Typography, Grid, Divider } from '@material-ui/core'
+import { AppBar, Container, Typography, Grid, Divider, Paper } from '@material-ui/core'
 import useStyles from './styles'
 
 import { getSchedToday } from '../../redux/actions/schedule'
@@ -23,15 +23,6 @@ const Dashboard = () => {
 
     const locale = 'ph';
     const [today, setDate] = React.useState(new Date());
-
-    useEffect(()=> {
-        const timer = setInterval(() => { 
-            setDate(new Date());
-          }, 60 * 1000);
-          return () => {
-            clearInterval(timer);
-        }
-    })
 
     const day = today.toLocaleDateString(locale, { weekday: 'long' });
     const date = `${day}, ${today.getDate()} ${today.toLocaleDateString(locale, { month: 'long' })}\n\n`;
@@ -62,6 +53,7 @@ const Dashboard = () => {
             dispatch(getRecyclablesToday())
             dispatch(getTotalPerStreetToday())
             dispatch(getResidentCount())
+            setDate(new Date());
           }, 1000);
           return () => clearInterval(interval);
     
@@ -85,37 +77,48 @@ const Dashboard = () => {
                 </AppBar>
                 
                 <Grid container spacing={3}>
-
-                    <Grid item xs={12} lg={3}>
-                        {schedToday.type == 'Biodegradable'?
-                            <Grid item xs={12} lg={12}>
-                                <Biodegradable bio={bio}/>
-                            </Grid>
-                            : null
-                        }
-                        
-                        {schedToday.type == 'non-Biodegradable'?
-                            <Grid item xs={12} lg={12}>
-                                <NonBiodegradable nonBio={nonBio}/>
-                            </Grid>
-                            : null
-                        }
-
-                        {schedToday.type == 'Recyclable'?
-                            <Grid item xs={12} lg={12}>
-                                <Recyclable recyclable={recyclable}/>
-                            </Grid>
-                            : null
-                        }
-                        <Divider style={{ margin: '5px 0' }} />
-                        <Grid item xs={12} lg={12}>
-                            <CollectionStatus/>
+                    {schedToday == null ?<>
+                        <Grid item xs={12} lg={3}>
+                            <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
+                                <div className="text-center text-white">
+                                    <h3>No Assigned Schedule Today!</h3>
+                                </div>
+                            </Paper>
                         </Grid>
-                        <Divider style={{ margin: '5px 0' }} />
-                        <Grid item xs={12} lg={12}>
-                            <ResidentCount residentCount={residentCount}/>
+                    </>: <>
+                        <Grid item xs={12} lg={3}>
+                            {schedToday.type == 'Biodegradable'?
+                                <Grid item xs={12} lg={12}>
+                                    <Biodegradable bio={bio}/>
+                                </Grid>
+                                : null
+                            }
+                            
+                            {schedToday.type == 'non-Biodegradable'?
+                                <Grid item xs={12} lg={12}>
+                                    <NonBiodegradable nonBio={nonBio}/>
+                                </Grid>
+                                : null
+                            }
+
+                            {schedToday.type == 'Recyclable'?
+                                <Grid item xs={12} lg={12}>
+                                    <Recyclable recyclable={recyclable}/>
+                                </Grid>
+                                : null
+                            }
+                            <Divider style={{ margin: '5px 0' }} />
+                            <Grid item xs={12} lg={12}>
+                                <CollectionStatus/>
+                            </Grid>
+                            <Divider style={{ margin: '5px 0' }} />
+                            <Grid item xs={12} lg={12}>
+                                <ResidentCount residentCount={residentCount}/>
+                            </Grid>
                         </Grid>
-                    </Grid>
+                    </>}
+
+                    
                     <Grid item xs={12} lg={9}>
                         <Grid item xs={12} lg={12}>
                             <CollectionStreets totalCollected={totalCollected}/>

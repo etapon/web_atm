@@ -8,9 +8,11 @@ import { getBarangays } from '../../redux/actions/barangay';
 
 //styles
 import './App.css'
+
 import './Scripts'
 import useStyles from './styles'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
+import ScheduleIcon from '@material-ui/icons/Schedule.js'
 import {ButtonDropdown, DropdownMenu, DropdownItem, DropdownToggle, UncontrolledDropdown} from  'reactstrap'
 import { Button, Avatar } from '@material-ui/core'
 import mainLogo from '../../etm_logo.png'
@@ -76,6 +78,14 @@ const Header = () => {
         nav('/reports')
     }
 
+    const goToToday = () => {
+        nav('/scheduleDisplay')
+    }
+
+    const goToSchedules = () => {
+        nav('/schedules')
+    }
+
     return (
         <div>
              <nav className="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
@@ -88,8 +98,23 @@ const Header = () => {
                         {showNav? <>
                             <ul className="navbar-nav ms-auto">
                             <li className="nav-item mx-0 mx-lg-1 mt-2"><Link className="nav-link py-3 px-0 px-lg-3 rounded" to="/">Home</Link></li>
-                            <li className="nav-item mx-0 mx-lg-1 mt-2"><Link className="nav-link py-3 px-0 px-lg-3 rounded" to="/scheduledisplay">Today</Link></li>
-                            <li className="nav-item mx-0 mx-lg-1 mt-2"><Link className="nav-link py-3 px-0 px-lg-3 rounded" to="/schedules">Schedules</Link></li>
+                            <li className="nav-item mx-0 mx-lg-1">
+                                    <ButtonDropdown>
+                                        <UncontrolledDropdown>
+                                            <div className="nav-link py-2 px-0 px-lg-3 rounded">
+                                                <DropdownToggle nav className={classes.dropdown}> 
+                                                    <div className='mt-2'><ScheduleIcon/>&nbsp;&nbsp;Schedules<ArrowDropDownIcon/></div>
+                                                </DropdownToggle>
+                                                <DropdownMenu>
+                                                    <DropdownItem onClick={goToToday}>Today</DropdownItem>
+                                                    <DropdownItem onClick={goToSchedules}>All Sched</DropdownItem>
+                                                </DropdownMenu>
+                                            </div>
+                                        </UncontrolledDropdown>
+                                    </ButtonDropdown>
+                                </li>
+                            {/* <li className="nav-item mx-0 mx-lg-1 mt-2"><Link className="nav-link py-3 px-0 px-lg-3 rounded" to="/scheduledisplay">Today</Link></li>
+                            <li className="nav-item mx-0 mx-lg-1 mt-2"><Link className="nav-link py-3 px-0 px-lg-3 rounded" to="/schedules">Schedules</Link></li> */}
                             {user ? (<><li className="nav-item mx-0 mx-lg-1 mt-2"><Link className="nav-link py-3 px-0 px-lg-3 rounded" to="/announcements">Announcements</Link></li>
                             </>):(<></>)}
                             {user? (
