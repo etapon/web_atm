@@ -11,6 +11,7 @@ import udag from './devs/udag.jpg'
 import arcillas from './devs/arcillas.jpg'
 import huang from './devs/huang.jpg'
 import leano from './devs/leano.jpg'
+import ytable from './devs/ytable.jpg'
 // import udag from './devs/udag.jpg'
 
 // import './arsha/assets/vendor/aos/aos.css'
@@ -167,7 +168,7 @@ const Home = () => {
               <div class="member-info">
                 <h4>Udag Alexander</h4>
                 <span>Backend/Frontend Developer</span>
-                <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
+                <p>If you get tired, LEARN TO REST not to quit!</p>
                 <div class="social">
                   <a href="https://twitter.com/Udaglang" target="_blank"><i class="ri-twitter-fill"></i></a>
                   <a href="https://www.facebook.com/Udagz/" target="_blank"><i class="ri-facebook-fill"></i></a>
@@ -184,12 +185,11 @@ const Home = () => {
               <div class="member-info">
                 <h4>Arcillas Mary Joy</h4>
                 <span>Project Manager</span>
-                <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
+                <p>"Begin. Even if you have no idea if it will work."</p>
                 <div class="social">
-                  <a href="" target="_blank"><i class="ri-twitter-fill"></i></a>
                   <a href="https://www.facebook.com/mryjy.018" target="_blank"><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href="" target="_blank"> <i class="ri-linkedin-box-fill"></i> </a>
+                  <a href="https://www.instagram.com/_majoyiiieee._/" target="_blank"><i class="ri-instagram-fill"></i></a>
+                  <a href="https://www.linkedin.com/in/mary-joy-arcillas-271ba0237/" target="_blank"> <i class="ri-linkedin-box-fill"></i></a>
                 </div>
               </div>
             </div>
@@ -201,12 +201,12 @@ const Home = () => {
               <div class="member-info">
                 <h4>Leano Maria Princess</h4>
                 <span>Graphic Designer/ Frontend Developer</span>
-                <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
+                <p>“The purpose of our lives is to be happy.”</p>
                 <div class="social">
-                  <a href="" target="_blank"><i class="ri-twitter-fill"></i></a>
+                  <a href="https://twitter.com/ces_ssa" target="_blank"><i class="ri-twitter-fill"></i></a>
                   <a href="https://www.facebook.com/princess.leano" target="_blank"><i class="ri-facebook-fill"></i></a>
-                  <a href="" target="_blank"><i class="ri-instagram-fill"></i></a>
-                  <a href="" target="_blank"> <i class="ri-linkedin-box-fill"></i> </a>
+                  <a href="https://www.instagram.com/leano_cess/?hl=en" target="_blank"><i class="ri-instagram-fill"></i></a>
+                  <a href="https://www.linkedin.com/in/princess-lea%C3%B1o-399b9b236/" target="_blank"> <i class="ri-linkedin-box-fill"></i> </a>
                 </div>
               </div>
             </div>
@@ -218,12 +218,11 @@ const Home = () => {
               <div class="member-info">
                 <h4>Huang Eileen Joy</h4>
                 <span>The (quality) tester/ Analyst</span>
-                <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
+                <p>"It also seems impossible until it's done. -Nelson Mandela"</p>
                 <div class="social">
-                  <a href="" target="_blank"><i class="ri-twitter-fill"></i></a>
                   <a href="https://www.facebook.com/huangeileenjoy" target="_blank"><i class="ri-facebook-fill"></i></a>
-                  <a href="" target="_blank"><i class="ri-instagram-fill"></i></a>
-                  <a href="" target="_blank"> <i class="ri-linkedin-box-fill"></i> </a>
+                  <a href="https://www.instagram.com/eilnfretea/?hl=en" target="_blank"><i class="ri-instagram-fill"></i></a>
+                  <a href="https://www.linkedin.com/in/eileen-joy-huang-415b97237/" target="_blank"> <i class="ri-linkedin-box-fill"></i> </a>
                 </div>
               </div>
             </div>
@@ -231,16 +230,16 @@ const Home = () => {
 
           <div class="col-lg-6 mt-4">
             <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="400">
-              <div class="pic"><img src="./devs/udag.jpg" class="img-fluid" alt=""/></div>
+              <div class="pic"><img src={ytable} class="img-fluid" alt=""/></div>
               <div class="member-info">
                 <h4>Ytable Mark Joseph</h4>
                 <span>The (quality) tester/ Analyst</span>
-                <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
+                <p>“Failure is a detour; not a dead-end street.” -Zig Ziglar</p>
                 <div class="social">
-                  <a href="" target="_blank"><i class="ri-twitter-fill"></i></a>
+                  <a href="https://twitter.com/MarkYtable" target="_blank"><i class="ri-twitter-fill"></i></a>
                   <a href="https://www.facebook.com/Mark5647" target="_blank"><i class="ri-facebook-fill"></i></a>
-                  <a href="" target="_blank"><i class="ri-instagram-fill"></i></a>
-                  <a href="" target="_blank"> <i class="ri-linkedin-box-fill"></i> </a>
+                  <a href="https://www.instagram.com/nyx_ytable/" target="_blank"><i class="ri-instagram-fill"></i></a>
+                  <a href="https://www.linkedin.com/in/mark-joseph-ytable/" target="_blank"> <i class="ri-linkedin-box-fill"></i> </a>
                 </div>
               </div>
             </div>

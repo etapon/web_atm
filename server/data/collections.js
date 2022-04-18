@@ -1201,7 +1201,7 @@ export const collections = [
     },
     {
         "street": "Sta Rosa Street",
-        "type": "135-Biodegradable",
+        "type": "Biodegradable",
         "weight": 239,
         "date": "2022-03-31"
     },
