@@ -12,12 +12,7 @@ import arcillas from './devs/arcillas.jpg'
 import huang from './devs/huang.jpg'
 import leano from './devs/leano.jpg'
 import ytable from './devs/ytable.jpg'
-// import udag from './devs/udag.jpg'
-
-// import './arsha/assets/vendor/aos/aos.css'
-// import './arsha/assets/vendor/bootstrap/css/bootstrap.min.css'
 import './arsha/assets/vendor/bootstrap-icons/bootstrap-icons.css'
-// import './arsha/assets/vendor/boxicons/css/boxicons.min.css'
 import './arsha/assets/vendor/glightbox/css/glightbox.min.css'
 import './arsha/assets/vendor/remixicon/remixicon.css'
 import './arsha/assets/vendor/swiper/swiper-bundle.min.css'
@@ -173,7 +168,7 @@ const Home = () => {
                   <a href="https://twitter.com/Udaglang" target="_blank"><i class="ri-twitter-fill"></i></a>
                   <a href="https://www.facebook.com/Udagz/" target="_blank"><i class="ri-facebook-fill"></i></a>
                   <a href="https://www.instagram.com/dagzue/" target="_blank"><i class="ri-instagram-fill"></i></a>
-                  <a href="https://www.linkedin.com/in/alexander-udag-02b3421bb/" target="_blank"> <i class="ri-linkedin-box-fill"></i> </a>
+                  <a href="https://www.linkedin.com/in/alex-udag25/" target="_blank"> <i class="ri-linkedin-box-fill"></i> </a>
                 </div>
               </div>
             </div>

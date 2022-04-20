@@ -17,7 +17,7 @@ import {ButtonDropdown, DropdownMenu, DropdownItem, DropdownToggle, Uncontrolled
 import { Button, Avatar } from '@material-ui/core'
 import mainLogo from '../../etm_logo.png'
 
-
+import { Nav, Navbar} from 'react-bootstrap';
 
 const Header = () => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
@@ -88,15 +88,80 @@ const Header = () => {
 
     return (
         <div>
-             <nav className="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+            <Navbar collapseOnSelect  expand="lg" className="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
                 <div className="container">
                     <Link className="navbar-brand" to='/'> <img src={mainLogo} alt='mainLogo' style={{width:50}}/> E-TAPON MO!</Link>
-                    <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" onClick={()=>setShowNav(!showNav)}>
-                        Menu
+                    <Navbar.Toggle/>
+
+                        <Navbar.Collapse>
+                            <Nav className="justify-content-end" style={{ width: "100%" }}>
+                                <Nav.Item>
+                                    <li className="nav-item mx-0 mx-lg-1 mt-2"><Link className="nav-link py-3 px-0 px-lg-3 rounded" to="/">Home</Link></li>
+                                </Nav.Item>
+
+                                {user ? (<>
+                                <Nav.Item>
+                                    <li className="nav-item mx-0 mx-lg-1 mt-2"><Link className="nav-link py-3 px-0 px-lg-3 rounded" to="/announcements">Announcements</Link></li>
+                                </Nav.Item>
+                                </>):(<></>)}
+
+                                <Nav.Item>
+                                <li className="nav-item mx-0 mx-lg-1">
+                                    <ButtonDropdown>
+                                        <UncontrolledDropdown>
+                                            <div className="nav-link py-2 px-0 px-lg-3 rounded">
+                                                <DropdownToggle nav className={classes.dropdown}> 
+                                                    <div className='mt-2'><ScheduleIcon/>&nbsp;&nbsp;Schedules<ArrowDropDownIcon/></div>
+                                                </DropdownToggle>
+                                                <DropdownMenu>
+                                                    <DropdownItem onClick={goToToday}>Today</DropdownItem>
+                                                    <DropdownItem onClick={goToSchedules}>All Sched</DropdownItem>
+                                                </DropdownMenu>
+                                            </div>
+                                        </UncontrolledDropdown>
+                                    </ButtonDropdown>
+                                </li>
+                                </Nav.Item>
+                                {user? (
+                                <>
+                                <Nav.Item>
+                                    <li className="nav-item mx-0 mx-lg-1">
+                                        <ButtonDropdown>
+                                            <UncontrolledDropdown>
+                                                <div className="nav-link py-2 px-0 px-lg-3 rounded">
+                                                    <DropdownToggle nav className={classes.dropdown}> 
+                                                    <Avatar className={classes.purple} alt={user.result.name} src={user.result.image}>{user.result.name.charAt(0)}</Avatar>&nbsp;&nbsp;{user.result.name} <ArrowDropDownIcon/>
+                                                    </DropdownToggle>
+                                                    <DropdownMenu>
+                                                        <DropdownItem onClick={goToAccount}>Account</DropdownItem>
+                                                        {user.result.role == 'admin' ? (<DropdownItem onClick={goToDashBoard}>Dashboard</DropdownItem>):(<></>)}
+                                                        {user.result.role == 'admin' ? (<DropdownItem onClick={goToAnalytics}>Analytics</DropdownItem>):(<></>)}
+                                                        {user.result.role == 'admin' ? (<DropdownItem onClick={goToReports}>Reports</DropdownItem>):(<></>)}
+                                                        {user.result.role == 'admin' ? (<DropdownItem onClick={goToUsers}>Users</DropdownItem>):(<></>)}
+                                                        {user.result.role == 'admin' ? (<hr className='dropdown-divider'/>):(<></>)}
+                                                        <DropdownItem onClick={handleLogout}>Log Out</DropdownItem>
+                                                    </DropdownMenu>
+                                                </div>
+                                            </UncontrolledDropdown>
+                                        </ButtonDropdown>
+                                    </li>
+                                </Nav.Item>
+                            </>): (
+                                <Button variant='contained' color='primary' onClick={goToAuth}>Sign In</Button>
+                            )}
+
+                            </Nav>
+                        </Navbar.Collapse>
+                </div>
+            </Navbar>
+             {/* <nav className="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+                <div className="container">
+                    <Link className="navbar-brand" to='/'> <img src={mainLogo} alt='mainLogo' style={{width:50}}/> E-TAPON MO!</Link>
+                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon" style={{color: "#FFFFFF"}}></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarResponsive">
-                        {showNav? <>
-                            <ul className="navbar-nav ms-auto">
+                        <ul className="navbar-nav ms-auto">
                             <li className="nav-item mx-0 mx-lg-1 mt-2"><Link className="nav-link py-3 px-0 px-lg-3 rounded" to="/">Home</Link></li>
                             <li className="nav-item mx-0 mx-lg-1">
                                     <ButtonDropdown>
@@ -113,8 +178,6 @@ const Header = () => {
                                         </UncontrolledDropdown>
                                     </ButtonDropdown>
                                 </li>
-                            {/* <li className="nav-item mx-0 mx-lg-1 mt-2"><Link className="nav-link py-3 px-0 px-lg-3 rounded" to="/scheduledisplay">Today</Link></li>
-                            <li className="nav-item mx-0 mx-lg-1 mt-2"><Link className="nav-link py-3 px-0 px-lg-3 rounded" to="/schedules">Schedules</Link></li> */}
                             {user ? (<><li className="nav-item mx-0 mx-lg-1 mt-2"><Link className="nav-link py-3 px-0 px-lg-3 rounded" to="/announcements">Announcements</Link></li>
                             </>):(<></>)}
                             {user? (
@@ -143,11 +206,10 @@ const Header = () => {
                             </>): (
                                 <Button variant='contained' color='primary' onClick={goToAuth}>Sign In</Button>
                             )}
-                            </ul>
-                        </>: null}
+                        </ul>
                     </div>
                 </div>
-            </nav>
+            </nav> */}
         </div>
     )
 }

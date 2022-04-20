@@ -12,6 +12,10 @@ const complaintSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    residentEmail: {
+        type: String,
+        required: true
+    },
     residentProfile: String,
     residentStreet: String,
     title: String,
@@ -24,6 +28,10 @@ const complaintSchema = mongoose.Schema({
     createdAt: {
         type: Date,
         default: datePhilippines
+    },
+    seen: {
+        type: Boolean,
+        default: false
     }
 });
 

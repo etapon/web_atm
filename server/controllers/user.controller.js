@@ -163,6 +163,7 @@ export const signup = async (req,res) => {
 
 export const verifyUser = async (req, res) => {
     try {
+        
         const existingUser = await User.findOne({_id: req.params.id});
         if(!existingUser) return res.json({message: "Invalid Link", success: false})
 
