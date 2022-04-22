@@ -13,8 +13,6 @@ const Footer = () => {
                             <li className="list-inline-item"><a href="/schedules">Schedules</a></li>
                             <li className="list-inline-item">⋅</li>
                             <li className="list-inline-item"><a href="/wasteTypes">Waste Types</a></li>
-                            <li className="list-inline-item">⋅</li>
-                            <li className="list-inline-item"><a href="#">Our team</a></li>
                         </ul>
                         <p className="text-muted small mb-4 mb-lg-0">&copy; E-Tapon Mo. All Rights Reserved.</p>
                     </div>

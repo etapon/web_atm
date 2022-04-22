@@ -1,6 +1,10 @@
 export const Streets = [
     {
         barangay: "Barangay 178",
+        street: "Barangay 178"
+    },
+    {
+        barangay: "Barangay 178",
         street: "Saint Agustine Street"
     },
     {

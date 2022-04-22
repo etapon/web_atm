@@ -19,7 +19,7 @@ import './arsha/assets/vendor/swiper/swiper-bundle.min.css'
 import Footer from '../Layout/Footer'
 
 
-
+import { Button, ButtonBase } from '@material-ui/core'
 
 
 const Home = () => {
@@ -27,6 +27,14 @@ const Home = () => {
 
     const goToAppPage = () => {
         nav('/appPage')
+    }
+
+    const openSegregation = ()=>{
+      nav('/wasteTypes')
+    }
+
+    const openToday = () => {
+      nav('/scheduleDisplay')
     }
 
     return (
@@ -50,18 +58,22 @@ const Home = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-lg-4">
+                      <ButtonBase onClick={openSegregation}>
                         <div className="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
                             <div className="features-icons-icon d-flex"><i class="bi-window m-auto text-primary"></i></div>
-                            <h3>Segragation</h3>
+                            <h3>Segregation</h3>
                             <p className="lead mb-0">collections include segregation for bio non-bio and recyclables!</p>
                         </div>
+                        </ButtonBase>
                     </div>
                     <div className="col-lg-4">
+                      <ButtonBase onClick={openToday}>
                         <div className="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
                             <div className="features-icons-icon d-flex"><i class="bi-layers m-auto text-primary"></i></div>
                             <h3>Collectors’ location monitoring </h3>
                             <p className="lead mb-0">resident users can monitor the collectors’ positions in a map!</p>
                         </div>
+                        </ButtonBase>
                     </div>
                     <div className="col-lg-4">
                         <div className="features-icons-item mx-auto mb-0 mb-lg-3">

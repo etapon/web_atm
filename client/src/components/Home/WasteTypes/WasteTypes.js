@@ -57,7 +57,7 @@ const WasteTypes = () => {
         <div className='container'>
             <section className="page-section mt-5">
                 <div className='mt-2 mb-5'>
-                        <h3>Why is segragation important?</h3>
+                        <h3>Why is segregation important?</h3>
                         <p>Segregation at source is a crucial step to reduce the volume of waste for collection and disposal.</p>
                         <p>If not segregated, most solid wastes end up as “mixed garbage” and will add to the pile of garbage in landfills. </p>
                 </div>
@@ -68,12 +68,14 @@ const WasteTypes = () => {
                 <Button color="primary" variant={byNonBioVariant} onClick={handleByNonBiodegradable}>non-Biodegradable</Button>
                 <Button color="primary" variant={byRecyclableVariant} onClick={handleByRecyclable}>Recyclable</Button>
                 
+                <Divider style={{ margin: '10px 0' }} />
+                
                 {byBioVariant == "outlined"? <>
                     <h3>BIODEGRADABLE (NABUBULOK)</h3>
                     <p>Biodegradable waste is a type of garbage that may be decomposed by other living organisms. It mainly comes from plant or animal sources.</p>
 
                     <table className='table'>
-                        <thead>
+                        <thead className='table-dark'>
                             <tr>
                                 <th>Halimbawa</th>
                                 <th>Litrato</th>
@@ -133,7 +135,7 @@ const WasteTypes = () => {
                     <p>Non-biodegradable wastes are those that take a long time to break down or disintegrate. These are wastes that don't decompose into manure and pile up, polluting the environment. The combustion of these fuels pollutes the environment much more.</p>
 
                     <table className='table'>
-                        <thead>
+                        <thead className='table-dark'>
                             <tr>
                                 <th>Halimbawa</th>
                                 <th>Litrato</th>
@@ -165,7 +167,7 @@ const WasteTypes = () => {
                     <p>Recyclable waste that has been segregated from the waste stream and placed aside for recovery, reuse, or recycling.</p>
 
                     <table className='table'>
-                        <thead>
+                        <thead className='table-dark'>
                             <tr>
                                 <th>Halimbawa</th>
                                 <th>Litrato</th>

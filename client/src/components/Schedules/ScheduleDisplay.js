@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getSchedToday } from '../../redux/actions/schedule'
 import infographic from './ScheduleDetails/infographic.jpg'
 import ReactMapGL, { Marker } from 'react-map-gl'
+import { db } from '../../utils/firebase'
+import {ref, onValue} from 'firebase/database';
+import truck from './truck.png'
 
 const ScheduleDisplay = () => {
     const classes = useStyles()
@@ -13,6 +16,35 @@ const ScheduleDisplay = () => {
     const { schedToday } = useSelector((state)=> state.schedule)
     const locale = 'ph';
     const [today, setDate] = useState(new Date())
+
+    const [ collectorLat, setCollectorLat ] = useState();
+    const [ collectorLong, setCollectorLong ] = useState();
+    const [ active, setActive ] = useState(false)
+    const [ street, setStreet ] = useState()
+
+    useEffect(()=>{
+        onValue(ref(db), snapshot => {
+            const loc = snapshot.child('loc').val()
+            if(loc !== null){
+                setCollectorLat(loc.lat)
+                setCollectorLong(loc.long)
+            }
+
+            const activeStatus = snapshot.child('activeStatus').val()
+            if(activeStatus === 'active'){
+                setActive(true)
+            }else{
+                setActive(false)
+            }
+
+            const street = snapshot.child('streetAssigned').val()
+            if(street !== null){
+                setStreet(street)
+            }
+        })
+
+        
+    },[])
 
     useEffect(()=> {
         const interval = setInterval(() => {
@@ -42,16 +74,16 @@ const ScheduleDisplay = () => {
     const time = today.toLocaleTimeString(locale, { hour: 'numeric', hour12: true, minute: 'numeric' });
     
     return (
-        <div className='container'>
+        <div>
             <section className="page-section mt-5">
-                    <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
+                    <Paper style={{ padding: '20px', borderRadius: '15px', marginRight:"20px", marginLeft:"20px" }} elevation={6}>
                         <div className="text-center text-white">
                             <h1 className="mb-3">{wish + date + time}</h1>
                         </div>
                     </Paper>
                     <div className='mt-3'>
                         {schedToday == null ?<>
-                            <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
+                            <Paper style={{ padding: '20px', borderRadius: '15px', marginRight:"20px", marginLeft:"20px" }} elevation={6}>
                                 <div className="text-center text-white">
                                     <h3>No Assigned Schedule Today!</h3>
                                 </div>
@@ -59,7 +91,7 @@ const ScheduleDisplay = () => {
                         </>: <>
                             {Object.keys(schedToday).length >= 1 ?<>
                                 
-                                <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
+                                <Paper style={{ padding: '20px', borderRadius: '15px', marginRight:"20px", marginLeft:"20px" }} elevation={6}>
                                     <Grid container spacing={3}>
                                         <Grid item xs={12} lg={6}>
                                         <div className="text-center">
@@ -95,14 +127,29 @@ const ScheduleDisplay = () => {
                         </> }
                         
                     </div>
-                    <Paper className='mt-3' style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
-                        <h5 className='text-center'>Barangay 178 map</h5>
+                    {active? (<>
+                        <Paper className='mt-3' style={{ padding: '20px', borderRadius: '15px', marginRight:"20px", marginLeft:"20px" }} elevation={6}>
+                            <h1>Collection is Happening now</h1>
+                            <p>collector's current location is on: <strong>{street}</strong></p>
+                        </Paper>
+                    </>):(<>
+                        <Paper className='mt-3' style={{ padding: '20px', borderRadius: '15px', marginRight:"20px", marginLeft:"20px" }} elevation={6}>
+                            <h1>Collectors are currently offline</h1>
+                        </Paper>
+                    </>)}
+                    
+                    <Paper className='mt-3' style={{ padding: '20px', borderRadius: '15px', marginRight:"20px", marginLeft:"20px" }} elevation={6}>
+                        <h3 className='text-center'>Pasay City's Barangay 178 map</h3>
                         <ReactMapGL
                             mapStyle='mapbox://styles/etapon/cl1jmki7b009o15qsg5dfegwl'
                             
                             {...viewport}
                             mapboxApiAccessToken="pk.eyJ1IjoiZXRhcG9uIiwiYSI6ImNrejlhaHZ2ODFwOGMycnA0MGFyY3huN3MifQ.q9-oOru792YFjE9lp0SGFQ"
                             onViewportChange={nextViewport => setViewport(nextViewport)}>
+
+                                {active ? (<Marker latitude={collectorLat} longitude={collectorLong}>
+                                    <img src={truck} alt='truck' style={{width:viewport.zoom*3 ,cursor:'pointer'}}/>
+                                </Marker>):(<></>)}
                         </ReactMapGL>
                     </Paper>
             </section>

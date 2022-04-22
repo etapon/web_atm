@@ -12,7 +12,7 @@ const AppPage = () => {
                         <h2 class="site-headline font-weight-bold mt-lg-5 pt-lg-5">E-Tapon mo! Mobile App</h2>
                         <div class="site-tagline mb-3">The E-Tapon Application is an online and digital tool that gives residents of Barangay 178 in Pasay City with information on the most recent garbage collection updates.</div>
                         <div class="cta-btns">
-                            <div class="mb-4"><a class="btn btn-primary font-weight-bold theme-btn" target="_blank" href="https://mega.nz/file/dps1wDTa#XZMNz1l2uD1TDtXJ_5rzeuEgx5LNjJu_8zmZuti9TUQ">Get Started Now!</a></div>
+                            <div class="mb-4"><a class="btn btn-primary font-weight-bold theme-btn" target="_blank" href="https://mega.nz/file/94EBAQaR#N6iTtuOmlgtOmFAO-D6sXa3Fv_tzUwIqY5t3u4enyM0">Get Started Now!</a></div>
                             <ul class="app-stores list-unstyled list-inline mx-auto mx-md-0 d-inline-block">
                             </ul>
                         </div>
